@@ -3,7 +3,7 @@
 public class Equip
 {
     public string RfId { get; set; }
-    public Guid IdZone { get; set; }
+    public Guid ZoneId { get; set; }
     public string PlanePlace { get; set; }
     public string Name { get; set; }
     public Type Type { get; set; }
