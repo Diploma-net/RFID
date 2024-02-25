@@ -1,4 +1,4 @@
-﻿namespace RFLOT.DDL;
+﻿namespace RFLOT.DLL;
 
 public class Class1
 {
