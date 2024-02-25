@@ -1,0 +1,6 @@
+@RFLOT.WebApi_HostAddress = http://localhost:5031
+
+GET {{RFLOT.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
