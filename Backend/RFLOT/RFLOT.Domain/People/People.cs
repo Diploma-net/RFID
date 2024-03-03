@@ -6,10 +6,8 @@ public class People : Entity<Guid>
     {
         FullName = fullName;
         Role = role;
-        _peoples = new List<People>();
     }
-    private readonly List<People> _peoples;
-    public IReadOnlyCollection<People> Peoples => _peoples;
+    
     public string FullName { get; private set; }
     public Role Role { get; private set; }
 }

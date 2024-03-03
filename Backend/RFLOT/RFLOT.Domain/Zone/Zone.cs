@@ -6,11 +6,7 @@ public class Zone : Entity<Guid>
     {
         PlaneId = planeId;
         Name = name;
-        _zones = new List<Zone>();
     }
-    
-    private readonly List<Zone> _zones;
-    public IReadOnlyCollection<Zone> Zones => _zones;
     
     public string PlaneId { get; private set; }
     public string Name { get; private set; }
