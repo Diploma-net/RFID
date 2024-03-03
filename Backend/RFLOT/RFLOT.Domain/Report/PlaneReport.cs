@@ -2,6 +2,7 @@
 
 public class PlaneReport
 {
+
     public Guid Id { get; set; }
     public string PlaneId { get; set; }
     public DateTimeOffset DateTimeStart { get; set; }

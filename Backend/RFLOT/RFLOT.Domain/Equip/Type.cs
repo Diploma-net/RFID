@@ -1,4 +1,5 @@
 ﻿namespace RFLOT.Domain;
+
 /// <summary>
 /// 0 – FireExtinguisher (Огнетушитель),
 /// 1 – InformationCard (Информационная карточка)
@@ -8,8 +9,10 @@ public enum Type
 {
     ///<summary>Огнетушитель</summary>
     FireExtinguisher,
+
     ///<summary>Информационная карточка</summary>
     InformationCard,
+
     ///<summary>Кислородная маска</summary>
     OxygenMask
 }

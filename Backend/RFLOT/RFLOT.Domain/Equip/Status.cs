@@ -10,13 +10,17 @@
 public enum Status
 {
     ///<summary>Проблем нет</summary>
-    Ok, 
+    Ok,
+
     ///<summary>Не найден</summary>
     None,
+
     ///<summary>Не сканируется</summary>
     NotFound,
+
     ///<summary>Истёк срок годности</summary>
     DateFail,
+
     ///<summary>Срок годности меньше месяца</summary>
     DateMonth
 }
