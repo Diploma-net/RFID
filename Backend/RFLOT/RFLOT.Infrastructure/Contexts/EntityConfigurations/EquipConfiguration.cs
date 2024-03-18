@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RFLOT.Domain;
 using RFLOT.Domain.Equip;
 
-namespace RFLOT.DLL.EntityConfigurations;
+namespace RFLOT.Infrastructure.Contexts.EntityConfigurations;
 
 public class EquipConfiguration: IEntityTypeConfiguration<Equip>
 {

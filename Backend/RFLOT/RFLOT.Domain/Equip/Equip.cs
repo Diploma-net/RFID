@@ -11,7 +11,6 @@ public class Equip : Entity<string>
         DateTimeStart = dateTimeStart;
         DateTimeEnd = dateTimeEnd;
     }
-    
     public Guid ZoneId { get; private set; }
     public string PlanePlace { get; private set; }
     public string Name { get;private set; }
@@ -19,6 +18,7 @@ public class Equip : Entity<string>
     public DateTimeOffset DateTimeStart { get;private set; }
     public DateTimeOffset DateTimeEnd { get; private set; }
     public Status LastStatus { get; set; }
+    
     
 }
 

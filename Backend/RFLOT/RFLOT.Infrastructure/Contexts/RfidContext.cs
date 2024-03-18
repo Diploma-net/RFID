@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RFLOT.DLL.EntityConfigurations;
-using RFLOT.Domain;
 using RFLOT.Domain.Equip;
 using RFLOT.Domain.People;
 using RFLOT.Domain.Zone;
+using RFLOT.Infrastructure.Contexts.EntityConfigurations;
 
-namespace RFLOT.DLL;
+namespace RFLOT.Infrastructure.Contexts;
 
 public class RfidContext : DbContext
 {
@@ -13,13 +12,15 @@ public class RfidContext : DbContext
     {
     }
 
-    public DbSet<Equip> Users { get; set; }
-    public DbSet<People> Wallets { get; set; }
-    public DbSet<Zone> Currencies { get; set; }
+    public DbSet<Equip> Equips { get; set; }
+    public DbSet<People> Peoples { get; set; }
+    public DbSet<Zone> Zones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new EquipConfiguration());
+        modelBuilder.ApplyConfiguration(new PeopleConfiguration());
+        modelBuilder.ApplyConfiguration(new ZoneConfiguration());
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
