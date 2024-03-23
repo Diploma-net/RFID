@@ -1,4 +1,6 @@
 using CryptoTestApi.Swagger;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using RFLOT.Application;
 using RFLOT.WebApi.Endpoints;
 
@@ -31,8 +33,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+//Endpoints
 app.AddEquipEndpoints();
+app.MapPost("/auth",  (string login, string pass) =>
+{
+    if (login == "admin" && login == "admin")
+    {
+        return Results.Ok("admin");
+    }
+    return Results.NotFound();
+});
 
 app.Run();
 
