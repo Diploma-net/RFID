@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using RFLOT.Application.Commands;
+using RFLOT.Domain;
 using RFLOT.Domain.Equip;
 using RFLOT.Infrastructure.Contexts;
+using Type = RFLOT.Domain.Type;
 
 namespace RFLOT.Application.CommandHandlers;
 
@@ -19,7 +21,8 @@ public class AddNewEquipCommandHander : IRequestHandler<AddNewEquipCommand>
 
     public async Task Handle(AddNewEquipCommand command, CancellationToken cancellationToken)
     {
-        var equip = _mapper.Map<Equip>(command);
-       await _context.Equips.AddAsync(_mapper.Map<Equip>(command), cancellationToken);
+        var newEquip = new Equip(command.Id, command.ZoneId, command.PlanePlace, command.Name, command.Type , DateTimeOffset.Now, command.DateTimeEnd);
+       await _context.Equips.AddAsync(newEquip, cancellationToken);
+       await _context.SaveChangesAsync(cancellationToken);
     }
 }

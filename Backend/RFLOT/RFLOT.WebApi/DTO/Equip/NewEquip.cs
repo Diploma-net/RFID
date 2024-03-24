@@ -1,6 +1,8 @@
-﻿namespace RFLOT.WebApi.DTO;
+﻿using Type = RFLOT.Domain.Type;
+
+namespace RFLOT.WebApi.DTO.Equip;
 
 public class NewEquip
 {
-    public record Request(string Id, Guid ZoneId, string PlanePlace, string Name, int Type, DateTimeOffset DateTimeEnd);
+    public record Request(string Id, Guid ZoneId, string PlanePlace, string Name, Type Type, DateTimeOffset DateTimeEnd);
 }

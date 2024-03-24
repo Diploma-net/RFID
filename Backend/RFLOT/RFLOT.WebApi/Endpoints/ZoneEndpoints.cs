@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using RFLOT.Application.Commands;
 using RFLOT.WebApi.DTO;
+using RFLOT.WebApi.DTO.Equip;
 
 namespace RFLOT.WebApi.Endpoints;
 
 public static class ZoneEndpoints
 {
-    public static WebApplication AddEquipEndpoints(this WebApplication app)
+    public static WebApplication AddZoneEndpoints(this WebApplication app)
     {
         var endpoints = app.MapGroup("/zone");
         endpoints.MapGet("/get-zones",

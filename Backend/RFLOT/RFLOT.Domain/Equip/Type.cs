@@ -1,7 +1,7 @@
 ﻿namespace RFLOT.Domain;
 
 /// <summary>
-/// 0 – FireExtinguisher (Огнетушитель),
+/// 0 – FireExtinguisher (Огнетушитель)
 /// 1 – InformationCard (Информационная карточка)
 /// 2 – OxygenMask (Кислородная маска)
 /// </summary>

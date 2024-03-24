@@ -8,6 +8,6 @@ public class EquipConfiguration: IEntityTypeConfiguration<Equip>
 {
     public void Configure(EntityTypeBuilder<Equip> entityTypeBuilder)
     {
-        entityTypeBuilder.HasKey(x => x.Id);
+        entityTypeBuilder.HasKey(x => x.RfId);
     }
 }

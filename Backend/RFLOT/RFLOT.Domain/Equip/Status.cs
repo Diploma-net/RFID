@@ -6,6 +6,7 @@
 /// 2 – NotFound (Не сканируется),
 /// 3 – DataFail (истёк срок годности),
 /// 4 – DataMonth (срок годности меньше месяца)
+/// 5 - Arсhive (В архиве)
 /// </summary>
 public enum Status
 {
@@ -22,5 +23,8 @@ public enum Status
     DateFail,
 
     ///<summary>Срок годности меньше месяца</summary>
-    DateMonth
+    DateMonth,
+    
+    ///<summary>В архиве/Не используется</summary>
+    Arсhive
 }
