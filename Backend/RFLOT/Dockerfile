@@ -4,7 +4,7 @@ WORKDIR /app
 COPY ./RFLOT.WebApi/RFLOT.WebApi.csproj ./RFLOT.WebApi/RFLOT.WebApi.csproj
 COPY ./RFLOT.Infrastructure/RFLOT.Infrastructure.csproj ./RFLOT.Infrastructure/RFLOT.Infrastructure.csproj
 COPY ./RFLOT.Application/RFLOT.Application.csproj ./RFLOT.Application/RFLOT.Application.csproj
-COPY ./RFLOT.Domain/RFLOT.Domain.csproj ./RFLOT.Domain/RFLOTi.Domain.csproj
+COPY ./RFLOT.Domain/RFLOT.Domain.csproj ./RFLOT.Domain/RFLOT.Domain.csproj
 
 # restore only main project, it references everything that is required
 RUN dotnet restore ./RFLOT.WebApi/RFLOT.WebApi.csproj
@@ -14,7 +14,7 @@ COPY ./RFLOT.Infrastructure ./RFLOT.Infrastructure
 COPY ./RFLOT.Application ./RFLOT.Application
 COPY ./RFLOT.Domain ./RFLOT.Domain
 
-RUN dotnet publish ./RFLOT.WebApi/RFLOT.WebApi.csproj -c Release -o out --no-restore
+RUN dotnet publish ./RFLOT.WebApi/RFLOT.WebApi.csproj -c Release -o out --no-cache
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
