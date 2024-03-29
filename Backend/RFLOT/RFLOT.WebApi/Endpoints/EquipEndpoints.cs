@@ -10,6 +10,7 @@ public static class EquipEndpoints
     public static WebApplication AddEquipEndpoints(this WebApplication app)
     {
         var endpoints = app.MapGroup("/equip");
+        
         endpoints.MapPost("/add",
             async (IMediator mediator, NewEquip.Request request) =>
             {
@@ -17,6 +18,12 @@ public static class EquipEndpoints
                     request.Type, request.DateTimeEnd));
                 return Results.Ok();
             });
+        
+        endpoints.MapGet("/get-equips-by-zone-id", async (IMediator mediator, string idZone) => 
+        {
+            await mediator.Send(new Ge)
+        })
+            
         return app;
     }
 }

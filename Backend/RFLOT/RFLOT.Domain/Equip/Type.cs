@@ -9,7 +9,7 @@ public enum Type
 {
     ///<summary>Огнетушитель</summary>
     FireExtinguisher,
-
+    
     ///<summary>Информационная карточка</summary>
     InformationCard,
 

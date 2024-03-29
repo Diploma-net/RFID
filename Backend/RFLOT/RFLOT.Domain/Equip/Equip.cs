@@ -2,8 +2,6 @@
 
 public class Equip
 {
-    private Equip()
-    {}
     public Equip(string rfId, Guid zoneId, string planePlace, string name, Type type, DateTimeOffset dateTimeStart, DateTimeOffset dateTimeEnd, Status lastStatus = Status.Arсhive)
     {
         RfId = rfId;

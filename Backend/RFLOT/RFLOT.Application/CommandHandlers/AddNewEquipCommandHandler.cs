@@ -8,19 +8,19 @@ using Type = RFLOT.Domain.Type;
 
 namespace RFLOT.Application.CommandHandlers;
 
-public class AddNewEquipCommandHander : IRequestHandler<AddNewEquipCommand>
+public class AddNewEquipCommandHandler : IRequestHandler<AddNewEquipCommand>
 {
     private readonly RfidContext _context;
     private readonly IMapper _mapper;
 
-    public AddNewEquipCommandHander(RfidContext context, IMapper mapper)
+    public AddNewEquipCommandHandler(RfidContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
     public async Task Handle(AddNewEquipCommand command, CancellationToken cancellationToken)
-    {
+    { 
         var newEquip = new Equip(command.Id, command.ZoneId, command.PlanePlace, command.Name, command.Type , DateTimeOffset.Now, command.DateTimeEnd);
        await _context.Equips.AddAsync(newEquip, cancellationToken);
        await _context.SaveChangesAsync(cancellationToken);
