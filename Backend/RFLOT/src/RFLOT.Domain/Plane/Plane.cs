@@ -5,6 +5,7 @@ namespace RFLOT.Domain.Plane;
 
 public class Plane : IEntity
 {
+    private Plane() {}
     public Plane(string id, string name)
     {
         Id = id;

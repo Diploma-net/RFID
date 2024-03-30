@@ -4,6 +4,7 @@ namespace RFLOT.Domain.Equip;
 
 public class Equip : IEntity
 {
+    private Equip() {}
     public Equip(string id, string? idPlane, string space, string name, Type type, DateTimeOffset dateTimeStart, DateTimeOffset dateTimeEnd, Status lastStatus)
     {
         Id = id;

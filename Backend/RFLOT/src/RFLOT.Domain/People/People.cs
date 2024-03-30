@@ -4,6 +4,7 @@ namespace RFLOT.Domain.People;
 
 public class People : IEntity
 {
+    private People() {}
     public People(string id, string fullName, Role role)
     {
         Id = id;
