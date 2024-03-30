@@ -397,3 +397,6 @@ FodyWeavers.xsd
 **/.DS_Store
 
 .idea/
+db-data/
+init-data/
+pgadmin/
