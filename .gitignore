@@ -397,6 +397,6 @@ FodyWeavers.xsd
 **/.DS_Store
 
 .idea/
-db-data/
-init-data/
-pgadmin/
+/Backend/RFLOT/db-data
+/Backend/RFLOT/init-data
+/Backend/RFLOT/pgadmin/
