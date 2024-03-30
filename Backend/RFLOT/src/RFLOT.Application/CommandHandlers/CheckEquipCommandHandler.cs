@@ -9,17 +9,17 @@ namespace RFLOT.Application.CommandHandlers;
 
 public class CheckEquipCommandHandler : IRequestHandler<CheckEquipCommand, EquipInfo>
 {
-    private readonly RfidContext _context;
+    private readonly RfidDbContext _dbContext;
 
-    public CheckEquipCommandHandler(RfidContext context)
+    public CheckEquipCommandHandler(RfidDbContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
     public async Task<EquipInfo> Handle(CheckEquipCommand command, CancellationToken cancellationToken)
     {
         var equip =
-            await _context.Equips.FirstOrDefaultAsync(e => e.Id == command.RfId,
+            await _dbContext.Equips.FirstOrDefaultAsync(e => e.Id == command.RfId,
                 cancellationToken: cancellationToken) ?? throw new ApplicationException("АСО не найдено");
 
         return new EquipInfo

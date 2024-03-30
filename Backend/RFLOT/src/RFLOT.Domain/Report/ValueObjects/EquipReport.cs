@@ -3,9 +3,9 @@ using RFLOT.Domain.Equip;
 
 namespace RFLOT.Domain.Report.ValueObjects;
 
-public class EquipBadReport : ValueObject
+public class EquipReport : ValueObject
 {
-    public EquipBadReport(string rfId, Status status, string place)
+    public EquipReport(string rfId, Status status, string place)
     {
         RfId = rfId;
         Status = status;
@@ -14,7 +14,6 @@ public class EquipBadReport : ValueObject
 
     public string RfId { get; private set; }
     public Status Status { get; private set; }
-    
     public string Place { get; private set; }
     protected override IEnumerable<object> GetEqualityComponents()
     {

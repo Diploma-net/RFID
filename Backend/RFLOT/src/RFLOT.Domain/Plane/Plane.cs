@@ -12,8 +12,8 @@ public class Plane : IEntity
         Name = name;
     }
 
-    public string Id { get; }
-    public string Name { get; }
+    public string Id { get; private set; }
+    public string Name { get; private set; }
     private List<Zone> _zones = new();
     public IEnumerable<Zone> Zones
     {

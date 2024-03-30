@@ -10,11 +10,11 @@ namespace RFLOT.Application.CommandHandlers;
 
 public class AddNewEquipCommandHandler : IRequestHandler<AddNewEquipCommand>
 {
-    private readonly RfidContext _context;
+    private readonly RfidDbContext _dbContext;
 
-    public AddNewEquipCommandHandler(RfidContext context)
+    public AddNewEquipCommandHandler(RfidDbContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
     public async Task Handle(AddNewEquipCommand command, CancellationToken cancellationToken)

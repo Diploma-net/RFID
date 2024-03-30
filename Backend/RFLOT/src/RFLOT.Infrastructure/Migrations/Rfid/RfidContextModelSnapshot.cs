@@ -12,7 +12,7 @@ using RFLOT.Infrastructure.Equip;
 
 namespace RFLOT.Infrastructure.Migrations.Rfid
 {
-    [DbContext(typeof(RfidContext))]
+    [DbContext(typeof(RfidDbContext))]
     partial class RfidContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

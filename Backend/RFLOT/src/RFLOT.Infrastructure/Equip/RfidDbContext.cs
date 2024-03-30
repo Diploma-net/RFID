@@ -6,9 +6,9 @@ using RFLOT.Infrastructure.Equip.EntityConfigurations;
 
 namespace RFLOT.Infrastructure.Equip;
 
-public class RfidContext : DbContext
+public class RfidDbContext : DbContext
 {
-    public RfidContext(DbContextOptions<RfidContext> options) : base(options)
+    public RfidDbContext(DbContextOptions<RfidDbContext> options) : base(options)
     {
     }
 

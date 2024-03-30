@@ -10,5 +10,5 @@ public class GetZonesByIdPlaneQuery : IRequest<List<ZonesInfo>>
         IdPlane = idPlane;
     }
 
-    public string IdPlane { get;  }
+        public string IdPlane { get;  }
 }

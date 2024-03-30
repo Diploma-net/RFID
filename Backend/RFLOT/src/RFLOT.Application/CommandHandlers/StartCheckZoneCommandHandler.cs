@@ -8,16 +8,16 @@ namespace RFLOT.Application.CommandHandlers;
 
 public class StartCheckZoneCommandHandler : IRequestHandler<StartCheckZoneCommand, OneZoneInfo>
 {
-    private readonly RfidContext _context;
+    private readonly RfidDbContext _dbContext;
 
-    public StartCheckZoneCommandHandler(RfidContext context)
+    public StartCheckZoneCommandHandler(RfidDbContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
     public async Task<OneZoneInfo> Handle(StartCheckZoneCommand command, CancellationToken cancellationToken)
     {
-        var plane = await _context.Planes.FirstOrDefaultAsync(p => p.Id == command.IdPlane, cancellationToken: cancellationToken);
+        var plane = await _dbContext.Planes.FirstOrDefaultAsync(p => p.Id == command.IdPlane, cancellationToken: cancellationToken);
         return new OneZoneInfo
         {
             Name = command.NameZone,

@@ -13,7 +13,7 @@ using RFLOT.Infrastructure.Equip;
 
 namespace RFLOT.Infrastructure.Migrations.Rfid
 {
-    [DbContext(typeof(RfidContext))]
+    [DbContext(typeof(RfidDbContext))]
     [Migration("20240330172256_InitDb")]
     partial class InitDb
     {

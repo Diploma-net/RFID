@@ -9,7 +9,7 @@ public static class IoC
 {
     public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<RfidContext>(
+        services.AddDbContext<RfidDbContext>(
             options => options.UseNpgsql(
                 configuration.GetConnectionString("RfidConnection")
             )
