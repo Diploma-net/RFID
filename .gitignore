@@ -399,4 +399,4 @@ FodyWeavers.xsd
 .idea/
 /Backend/RFLOT/db-data
 /Backend/RFLOT/init-data
-/Backend/RFLOT/pgadmin/
+/Backend/RFLOT/pgadmin
