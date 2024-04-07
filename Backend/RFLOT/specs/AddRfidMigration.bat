@@ -4,13 +4,14 @@ if "%migration%"=="" (
 	echo You didn't enter migration name!
 )
 
+
 cd ..\src\RFLOT.Infrastructure
 
 if "%migration%"=="-" (
 	echo Removing last migration!
-	dotnet ef migrations remove -s ..\RFLOT.WebApi\RFLOT.WebApi.csproj -c RfidContext
+	dotnet ef migrations remove -s ..\RFLOT.WebApi\RFLOT.WebApi.csproj -c RfidDbContext
 ) else (
-	dotnet ef migrations add %migration% -s ..\RFLOT.WebApi\RFLOT.WebApi.csproj -c RfidContext -o Migrations\Rfid
+	dotnet ef migrations add %migration% -s ..\RFLOT.WebApi\RFLOT.WebApi.csproj -c RfidDbContext -o Migrations\Rfid
 )
 
 if %errorlevel% == 0 (

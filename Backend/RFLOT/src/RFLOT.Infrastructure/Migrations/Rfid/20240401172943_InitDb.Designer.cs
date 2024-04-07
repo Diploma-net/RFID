@@ -14,7 +14,7 @@ using RFLOT.Infrastructure.Equip;
 namespace RFLOT.Infrastructure.Migrations.Rfid
 {
     [DbContext(typeof(RfidDbContext))]
-    [Migration("20240330172256_InitDb")]
+    [Migration("20240401172943_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -79,6 +79,10 @@ namespace RFLOT.Infrastructure.Migrations.Rfid
             modelBuilder.Entity("RFLOT.Domain.Plane.Plane", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<IEnumerable<Zone>>("Zones")

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RFLOT.Domain.People;
 using RFLOT.Domain.Plane;
-using RFLOT.Domain.Plane.ValueObjects;
 using RFLOT.Infrastructure.Equip.EntityConfigurations;
 
 namespace RFLOT.Infrastructure.Equip;

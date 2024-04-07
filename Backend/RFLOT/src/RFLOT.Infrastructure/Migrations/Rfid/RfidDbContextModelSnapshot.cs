@@ -13,7 +13,7 @@ using RFLOT.Infrastructure.Equip;
 namespace RFLOT.Infrastructure.Migrations.Rfid
 {
     [DbContext(typeof(RfidDbContext))]
-    partial class RfidContextModelSnapshot : ModelSnapshot
+    partial class RfidDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -76,6 +76,10 @@ namespace RFLOT.Infrastructure.Migrations.Rfid
             modelBuilder.Entity("RFLOT.Domain.Plane.Plane", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<IEnumerable<Zone>>("Zones")

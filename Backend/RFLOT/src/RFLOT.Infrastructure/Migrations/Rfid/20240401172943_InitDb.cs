@@ -49,6 +49,7 @@ namespace RFLOT.Infrastructure.Migrations.Rfid
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     Zones = table.Column<IEnumerable<Zone>>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
