@@ -8,4 +8,5 @@ public class OneZoneInfo
     public int CountSpaces => Spaces.Count;
     
     public string Name { get; set; }
+    public List<ReportEquipResult> EquipResults { get; set; }
 }

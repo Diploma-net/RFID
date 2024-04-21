@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFLOT.Application", "src\RF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFLOT.Common", "src\RFLOT.Common\RFLOT.Common.csproj", "{D1093A72-2EFE-4D2B-A18B-83047883D1AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFLOT.WebSocket", "src\RFLOT.WebSocket\RFLOT.WebSocket.csproj", "{FC86F6AD-A446-445F-B66E-DA0B08C5B06F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFLOT.Auth", "RFLOT.Auth\RFLOT.Auth.csproj", "{2349DCD9-CACC-42D8-904E-84981F51F189}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{D1093A72-2EFE-4D2B-A18B-83047883D1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1093A72-2EFE-4D2B-A18B-83047883D1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1093A72-2EFE-4D2B-A18B-83047883D1AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC86F6AD-A446-445F-B66E-DA0B08C5B06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC86F6AD-A446-445F-B66E-DA0B08C5B06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC86F6AD-A446-445F-B66E-DA0B08C5B06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC86F6AD-A446-445F-B66E-DA0B08C5B06F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2349DCD9-CACC-42D8-904E-84981F51F189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2349DCD9-CACC-42D8-904E-84981F51F189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2349DCD9-CACC-42D8-904E-84981F51F189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2349DCD9-CACC-42D8-904E-84981F51F189}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
