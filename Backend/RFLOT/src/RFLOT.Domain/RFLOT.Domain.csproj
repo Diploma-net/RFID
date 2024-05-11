@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RFLOT.Common\RFLOT.Common.csproj" />
+        <ProjectReference Include="..\RFLOT.Common\RFLOT.Common.csproj"/>
     </ItemGroup>
-    
+
 </Project>

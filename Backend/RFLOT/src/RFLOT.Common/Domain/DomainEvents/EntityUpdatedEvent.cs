@@ -1,15 +1,14 @@
 ﻿using MediatR;
 
-namespace RFLOT.Common.Domain.DomainEvents
-{
-    public class EntityUpdatedEvent<T> : INotification
-        where T : IDomainEventEntity
-    {
-        public T Entity { get; }
+namespace RFLOT.Common.Domain.DomainEvents;
 
-        public EntityUpdatedEvent(T entity)
-        {
-            Entity = entity;
-        }
+public class EntityUpdatedEvent<T> : INotification
+    where T : IDomainEventEntity
+{
+    public EntityUpdatedEvent(T entity)
+    {
+        Entity = entity;
     }
+
+    public T Entity { get; }
 }

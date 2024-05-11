@@ -1,7 +1,6 @@
-﻿namespace RFLOT.Common.Domain.Entity
+﻿namespace RFLOT.Common.Domain.Entity;
+
+public interface IEntity<T>
 {
-    public interface IEntity
-    {
-        public string Id { get; }
-    }
+    public T Id { get; }
 }

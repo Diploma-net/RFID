@@ -1,14 +1,20 @@
 ﻿using RFLOT.Common.Domain.Entity;
+using RFLOT.Domain.Equip.ValueObjects;
+using Type = RFLOT.Domain.Equip.ValueObjects.Type;
 
 namespace RFLOT.Domain.Equip;
 
-public class Equip : IEntity
+public class Equip : IEntity<Guid>
 {
-    private Equip() {}
-    public Equip(string id, string? idPlane, string space, string name, Type type, DateTimeOffset dateTimeStart, DateTimeOffset dateTimeEnd, Status lastStatus)
+    private Equip()
+    {
+    }
+
+    public Equip(Guid id, Guid? zoneId, string space, string name, Type type, DateTimeOffset dateTimeStart,
+        DateTimeOffset dateTimeEnd, Status lastStatus)
     {
         Id = id;
-        IdPlane = idPlane;
+        ZoneId = zoneId;
         Space = space;
         Name = name;
         Type = type;
@@ -17,14 +23,15 @@ public class Equip : IEntity
         LastStatus = lastStatus;
     }
 
-    public string Id { get; private set; }
-    public string? IdPlane { get; private set; }
+    public Guid? ZoneId { get; private set; }
     public string? Space { get; private set; }
-    public string Name { get;private set; }
-    public Type Type { get;private set; }
-    public DateTimeOffset DateTimeStart { get;private set; }
+    public string Name { get; private set; }
+    public Type Type { get; }
+    public DateTimeOffset DateTimeStart { get; private set; }
     public DateTimeOffset? DateTimeEnd { get; private set; }
     public Status LastStatus { get; set; }
+
+    public Guid Id { get; }
 
     public string GetStatusString()
     {
@@ -39,6 +46,7 @@ public class Equip : IEntity
             _ => throw new ArgumentOutOfRangeException()
         };
     }
+
     public string GetTypeString()
     {
         return Type switch
@@ -50,4 +58,3 @@ public class Equip : IEntity
         };
     }
 }
-

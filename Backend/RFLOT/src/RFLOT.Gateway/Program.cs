@@ -1,0 +1,41 @@
+using RFLOT.Application;
+using RFLOT.Gateway.Endpoints;
+using RFLOT.Gateway.Swagger;
+using RFLOT.Identity;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddIdentity(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddEndpointsApiExplorer();
+
+builder.SetupSwagger();
+
+builder.Services.Configure<RouteOptions>(
+    options =>
+    {
+        options.LowercaseUrls = true;
+        options.LowercaseQueryStrings = true;
+    }
+);
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+//Endpoints
+app.AddAuthEndpoints();
+app.AddEquipEndpoints();
+app.AddZoneEndpoints();
+
+
+app.Run();

@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace RFLOT.Common.Domain.DomainEvents
+namespace RFLOT.Common.Domain.DomainEvents;
+
+public interface IEventAddStrategy
 {
-    public interface IEventAddStrategy
-    {
-        void AddTo(LinkedList<INotification> events);
-    }
+    void AddTo(LinkedList<INotification> events);
 }

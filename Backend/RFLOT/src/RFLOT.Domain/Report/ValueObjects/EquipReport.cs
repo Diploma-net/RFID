@@ -1,5 +1,5 @@
 ﻿using RFLOT.Common.Domain;
-using RFLOT.Domain.Equip;
+using RFLOT.Domain.Equip.ValueObjects;
 
 namespace RFLOT.Domain.Report.ValueObjects;
 
@@ -12,9 +12,10 @@ public class EquipReport : ValueObject
         Space = space;
     }
 
-    public string RfId { get; private set; }
-    public Status Status { get; private set; }
-    public string Space { get; private set; }
+    public string RfId { get; }
+    public Status Status { get; }
+    public string Space { get; }
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return RfId;

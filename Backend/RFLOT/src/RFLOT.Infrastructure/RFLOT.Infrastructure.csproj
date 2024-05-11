@@ -7,16 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RFLOT.Domain\RFLOT.Domain.csproj" />
+        <ProjectReference Include="..\RFLOT.Domain\RFLOT.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

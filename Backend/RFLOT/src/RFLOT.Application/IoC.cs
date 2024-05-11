@@ -2,14 +2,14 @@
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using RFLOT.Infrastructure;
 
 namespace RFLOT.Application;
 
 public static class IoC
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services, IConfigurationManager configuration)
+    public static IServiceCollection AddApplication(this IServiceCollection services,
+        IConfigurationManager configuration)
     {
         services.AddDatabase(configuration);
         var assembly = typeof(IoC).Assembly;
