@@ -12,7 +12,7 @@ public static class ZoneEndpoints
         endpoints.MapGet("/get-zones-by-plane",
             async (IMediator mediator, Guid planeId) =>
             {
-                var zonesName = await mediator.Send(new GetZonesByIdPlaneQuery(planeId));
+                var zonesName = await mediator.Send(new GetZonesByIdReportQuery(planeId));
                 return Results.Ok(zonesName);
             });
 

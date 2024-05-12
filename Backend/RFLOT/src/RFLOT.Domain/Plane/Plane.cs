@@ -2,13 +2,13 @@ using RFLOT.Common.Domain.Entity;
 
 namespace RFLOT.Domain.Plane;
 
-public class Plane : IEntity<string>
+public class Plane : IEntity<Guid>
 {
     private Plane()
     {
     }
 
-    public Plane(string id, string name)
+    public Plane(Guid id, string name)
     {
         Id = id;
         Name = name;
@@ -16,5 +16,5 @@ public class Plane : IEntity<string>
 
     public string Name { get; private set; }
 
-    public string Id { get; }
+    public Guid Id { get; private set; }
 }

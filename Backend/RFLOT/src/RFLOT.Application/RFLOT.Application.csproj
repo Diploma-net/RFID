@@ -12,31 +12,27 @@
         <PackageReference Include="FluentValidation" Version="11.9.0"/>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0"/>
         <PackageReference Include="MediatR" Version="12.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\RFLOT.Domain\RFLOT.Domain.csproj"/>
+        <ProjectReference Include="..\RFLOT.Identity\RFLOT.Identity.csproj" />
         <ProjectReference Include="..\RFLOT.Infrastructure\RFLOT.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Equip\NotificationHandler\"/>
-        <Folder Include="Equip\Notification\"/>
         <Folder Include="Equip\QueryHandler\"/>
         <Folder Include="Equip\Query\"/>
-        <Folder Include="Plane\CommandHandler\"/>
-        <Folder Include="Plane\Command\"/>
         <Folder Include="Plane\Models\"/>
         <Folder Include="Plane\NotificationHandler\"/>
-        <Folder Include="Plane\Notification\"/>
         <Folder Include="Plane\QueryHandler\"/>
         <Folder Include="Plane\Query\"/>
         <Folder Include="Report\CommandHandler\"/>
         <Folder Include="Report\Command\"/>
-        <Folder Include="Report\NotificationHandler\"/>
-        <Folder Include="Report\Notification\"/>
-        <Folder Include="Zone\NotificationHandler\"/>
-        <Folder Include="Zone\Notification\"/>
+        <Folder Include="Zone\NotificationHandler\" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RFLOT.Infrastructure.Report.EntityConfigurations;
 
 namespace RFLOT.Infrastructure.Report;
 
@@ -12,6 +13,7 @@ public class ReportDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new ReportConfiguration());
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

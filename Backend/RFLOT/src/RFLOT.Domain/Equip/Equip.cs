@@ -1,10 +1,12 @@
-﻿using RFLOT.Common.Domain.Entity;
+﻿using RFLOT.Common.Domain.DomainEvents;
+using RFLOT.Common.Domain.Entity;
+using RFLOT.Domain.Equip.Events;
 using RFLOT.Domain.Equip.ValueObjects;
 using Type = RFLOT.Domain.Equip.ValueObjects.Type;
 
 namespace RFLOT.Domain.Equip;
 
-public class Equip : IEntity<Guid>
+public class Equip : DomainEventEntity, IEntity<Guid>
 {
     private Equip()
     {
@@ -23,15 +25,15 @@ public class Equip : IEntity<Guid>
         LastStatus = lastStatus;
     }
 
+    public Guid Id { get; private set; }
     public Guid? ZoneId { get; private set; }
     public string? Space { get; private set; }
     public string Name { get; private set; }
-    public Type Type { get; }
+    public Type Type { get; private set; }
     public DateTimeOffset DateTimeStart { get; private set; }
     public DateTimeOffset? DateTimeEnd { get; private set; }
     public Status LastStatus { get; set; }
 
-    public Guid Id { get; }
 
     public string GetStatusString()
     {
@@ -56,5 +58,11 @@ public class Equip : IEntity<Guid>
             Type.OxygenMask => "Кислородная маска",
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+
+    public void CheckEquip(Status newStatus, Guid idReport,Guid idZone, Guid idUser)
+    {
+        LastStatus = newStatus;
+        AddDomainEvent(new EquipChecked(Id, LastStatus, idReport, idZone, idUser));
     }
 }

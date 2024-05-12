@@ -3,7 +3,7 @@
 namespace RFLOT.Common.Domain.DomainEvents;
 
 public class EntityDeletedEvent<T> : INotification
-    where T : IDomainEventEntity
+    where T : IDomainEntity
 {
     public EntityDeletedEvent(T entity)
     {

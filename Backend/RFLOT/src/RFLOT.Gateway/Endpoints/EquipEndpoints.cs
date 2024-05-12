@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using RFLOT.Application.Equip.Command;
+using RFLOT.Domain.Equip.ValueObjects;
 using RFLOT.Gateway.DTO.Equip;
 
 namespace RFLOT.Gateway.Endpoints;
@@ -19,9 +20,9 @@ public static class EquipEndpoints
             });
 
         endpoints.MapGet("/check",
-            async (IMediator mediator, Guid rfid) =>
+            async (IMediator mediator, Guid idEquip, Status statusEquip, Guid idZone, Guid idReport, Guid idUser) =>
             {
-                var result = await mediator.Send(new CheckEquipCommand(rfid));
+                var result = await mediator.Send(new CheckEquipCommand(idEquip, statusEquip, idZone, idReport, idUser));
                 return Results.Ok(result);
             });
 

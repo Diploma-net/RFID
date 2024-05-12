@@ -13,7 +13,7 @@ public static class IoC
     {
         services.AddDatabase(configuration);
         var assembly = typeof(IoC).Assembly;
-
+        services.AddSignalRCore();
         services.AddMediatR(x => x.RegisterServicesFromAssembly(assembly));
         services.AddAutoMapper(assembly);
         services.AddValidatorsFromAssembly(assembly);

@@ -1,8 +1,8 @@
 ﻿namespace RFLOT.Gateway.Monitoring.Models;
 
-public class NewConnection
+public class PlaneConnection
 {
-    public NewConnection(Guid idReport, Guid idUser)
+    public PlaneConnection(Guid idReport, Guid idUser)
     {
         IdReport = idReport;
         IdUser = idUser;

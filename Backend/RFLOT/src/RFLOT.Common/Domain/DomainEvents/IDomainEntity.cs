@@ -2,7 +2,7 @@ using MediatR;
 
 namespace RFLOT.Common.Domain.DomainEvents;
 
-public interface IDomainEventEntity
+public interface IDomainEntity
 {
     IReadOnlyCollection<INotification> DomainEvents { get; }
 

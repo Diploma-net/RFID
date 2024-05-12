@@ -11,8 +11,8 @@ public class Zone : IEntity<Guid>
         Name = name;
     }
 
-    public Guid IdPlane { get; }
-    public string Name { get; }
+    public Guid IdPlane { get; private set; }
+    public string Name { get; private set;}
 
-    public Guid Id { get; }
+    public Guid Id { get; private set;}
 }

@@ -1,18 +1,21 @@
-﻿using RFLOT.Common.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+using RFLOT.Common.Domain;
+using RFLOT.Common.Domain.DomainEvents;
+using RFLOT.Domain.Equip.ValueObjects;
+using RFLOT.Domain.Report.Events;
 using RFLOT.Domain.Report.ValueObjects;
 
 namespace RFLOT.Domain.Report;
 
-public class Report : IAggregateRoot<Guid>
+public class Report : DomainEventEntity, IAggregateRoot<Guid>
 {
-    private List<EquipReport> _equipReports = new();
-    public List<string> FullNameCheckers = new();
+    private List<ZoneReport> _zoneReports = new();
 
     private Report()
     {
     }
 
-    public Report(string idPlane, ReportType type)
+    public Report(Guid idPlane, ReportType type)
     {
         Id = Guid.NewGuid();
         IdPlane = idPlane;
@@ -20,28 +23,38 @@ public class Report : IAggregateRoot<Guid>
         DateTimeStart = DateTimeOffset.Now;
         StatusReport = true;
     }
-
-    public string IdPlane { get; private set; }
-    public ReportType Type { get; }
+    public Guid Id { get; private set; }
+    public Guid IdPlane { get; private set; }
+    public ReportType Type { get; private set; }
     public DateTimeOffset DateTimeStart { get; private set; }
-    public DateTimeOffset? DateTimeFinish { get; }
+    public DateTimeOffset? DateTimeFinish { get; private set;}
     public bool StatusReport { get; set; }
 
-    public IEnumerable<EquipReport> EquipReports
+    public IEnumerable<ZoneReport> ZoneReports
     {
-        get => _equipReports?.ToList();
-        internal set => _equipReports = value?.ToList();
+        get => _zoneReports?.ToList();
+        internal set => _zoneReports = value?.ToList();
     }
 
-    public Guid Id { get; }
-
-    public string GetReportTypeString()
+    public void StartZoneReport(Guid idZone, Guid idUser)
     {
-        return Type switch
+        if (_zoneReports.FirstOrDefault(z => z.IdZone == idZone) == null)
         {
-            ReportType.Post => "Post",
-            ReportType.Pre => "Pre",
-            _ => throw new ArgumentOutOfRangeException()
-        };
+            var newZoneReport = new ZoneReport(idZone);
+            newZoneReport.AddChecker(idUser);
+            _zoneReports.Add(newZoneReport);
+        }
+        else
+        {
+            var zoneReport = _zoneReports.FirstOrDefault(z => z.IdZone == idZone);
+            zoneReport.AddChecker(idUser);
+        }
+    }
+
+    public void AddCheckedEquip(Guid idZone, Guid idEquip, Status status, string space, Guid idUser)
+    {
+        var zoneReport = _zoneReports.FirstOrDefault(z => z.IdZone == idZone);
+        zoneReport.AddCheckedEquip(idEquip, status, space, idUser);
+        AddDomainEvent(new NewEquipCheckedInReport(Id, idZone, space, status));
     }
 }

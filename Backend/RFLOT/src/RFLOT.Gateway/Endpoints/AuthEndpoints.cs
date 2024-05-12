@@ -8,12 +8,12 @@ public static class AuthEndpoints
     {
         var endpoints = app.MapGroup("/auth");
 
-        app.MapPost("/login-and-password", async (IAuthorization authorization, string login, string pass) =>
+        endpoints.MapPost("/login-and-password", async (IAuthorization authorization, string login, string pass) =>
         {
             var idUser = await authorization.Authorization(login, pass);
             return idUser != null ? Results.Ok(idUser) : Results.NotFound();
         });
-        app.MapPost("/rfid", async (IAuthorization authorization, string rfid) =>
+        endpoints.MapPost("/rfid", async (IAuthorization authorization, string rfid) =>
         {
             var idUser = await authorization.Authorization(rfid);
             return idUser != null ? Results.Ok(idUser) : Results.NotFound();

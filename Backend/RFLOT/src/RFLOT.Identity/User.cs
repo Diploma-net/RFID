@@ -4,8 +4,9 @@ namespace RFLOT.Identity;
 
 public class User : IEntity<Guid>
 {
-    public string Login { get; }
-    public string Password { get; }
-    public string? Rfid { get; }
-    public Guid Id { get; }
+    public Guid Id { get; private set; }
+    public string Login { get; private set; }
+    public string Password { get; private set; }
+    public string? Rfid { get; private set; }
+    public string FullName { get; private set; }
 }

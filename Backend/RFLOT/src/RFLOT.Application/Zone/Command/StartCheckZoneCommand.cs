@@ -5,14 +5,14 @@ namespace RFLOT.Application.Zone.Command;
 
 public class StartCheckZoneCommand : IRequest<OneZoneInfo>
 {
-    public StartCheckZoneCommand(string idPlane, string nameZone, Guid idReport)
+    public StartCheckZoneCommand(Guid idZone, Guid idReport, Guid idUser)
     {
-        IdPlane = idPlane;
-        NameZone = nameZone;
+        IdZone = idZone;
         IdReport = idReport;
+        IdUser = idUser;
     }
 
-    public string IdPlane { get; }
-    public string NameZone { get; }
+    public Guid IdZone { get; }
+    public Guid IdUser { get; }
     public Guid IdReport { get; }
 }

@@ -18,15 +18,17 @@ public class CheckEquipCommandHandler : IRequestHandler<CheckEquipCommand, Equip
     public async Task<EquipInfo> Handle(CheckEquipCommand command, CancellationToken cancellationToken)
     {
         var equip =
-            await _dbContext.Equips.FirstOrDefaultAsync(e => e.Id == command.RfId,
+            await _dbContext.Equips.FirstOrDefaultAsync(e => e.Id == command.IdEquip,
                 cancellationToken) ?? throw new ApplicationException("АСО не найдено");
-
+        var equipLastStatus = equip.LastStatus;
+        equip.CheckEquip(command.StatusEquip, command.IdReport, command.IdZone, command.IdUser);
+        await _dbContext.SaveChangesAsync(cancellationToken);
         return new EquipInfo
         {
-            LastStatus = equip.GetStatusString(),
+            Space = equip.Space,
+            Type = equip.Type,
             Name = equip.Name,
-            Space = equip.Space ?? "АСО не привязано к определенному месту",
-            Type = equip.GetTypeString()
+            LastStatus = equipLastStatus
         };
     }
 }

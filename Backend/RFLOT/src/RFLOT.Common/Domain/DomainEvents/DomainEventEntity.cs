@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using RFLOT.Common.Domain.Entity;
 
 namespace RFLOT.Common.Domain.DomainEvents;
 
-public class DomainEventEntity : IDomainEventEntity
+public abstract class DomainEventEntity : IDomainEntity
 {
     private DomainEventCollection? _domainEvents;
     public IReadOnlyCollection<INotification>? DomainEvents => _domainEvents?.AsReadOnly();

@@ -5,20 +5,28 @@ namespace RFLOT.Domain.Report.ValueObjects;
 
 public class EquipReport : ValueObject
 {
-    public EquipReport(string rfId, Status status, string space)
+    private EquipReport()
     {
-        RfId = rfId;
+        
+    }
+    public EquipReport(Guid idEquip, Status status, string space, DateTimeOffset dateTimeCheck, Guid idUser)
+    {
+        IdEquip = idEquip;
         Status = status;
         Space = space;
+        DateTimeCheck = dateTimeCheck;
+        IdUser = idUser;
     }
 
-    public string RfId { get; }
+    public Guid IdEquip { get; }
     public Status Status { get; }
     public string Space { get; }
+    public DateTimeOffset DateTimeCheck { get; }
+    public Guid IdUser { get;  }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
-        yield return RfId;
+        yield return IdEquip;
         yield return Status;
         yield return Space;
     }

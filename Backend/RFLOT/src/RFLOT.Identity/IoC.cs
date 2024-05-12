@@ -15,6 +15,7 @@ public static class IoC
             )
         );
         services.AddScoped<IAuthorization, Authorizations>();
+        services.AddScoped<IGetUser, GetUser>();
         return services;
     }
 }

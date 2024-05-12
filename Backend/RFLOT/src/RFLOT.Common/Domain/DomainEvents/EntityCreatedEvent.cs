@@ -3,7 +3,7 @@
 namespace RFLOT.Common.Domain.DomainEvents;
 
 public class EntityCreatedEvent<T> : INotification
-    where T : IDomainEventEntity
+    where T : IDomainEntity
 {
     public EntityCreatedEvent(T entity)
     {

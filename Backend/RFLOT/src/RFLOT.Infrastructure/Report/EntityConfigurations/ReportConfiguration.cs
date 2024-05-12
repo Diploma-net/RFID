@@ -8,6 +8,6 @@ public class ReportConfiguration : IEntityTypeConfiguration<Domain.Report.Report
     public void Configure(EntityTypeBuilder<Domain.Report.Report> entityTypeBuilder)
     {
         entityTypeBuilder.HasKey(x => x.Id);
-        entityTypeBuilder.Property(e => e.EquipReports).HasColumnType("jsonb");
+        entityTypeBuilder.Property(e => e.ZoneReports).HasColumnType("jsonb");
     }
 }
