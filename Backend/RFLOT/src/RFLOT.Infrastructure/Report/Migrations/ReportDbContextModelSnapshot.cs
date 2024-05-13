@@ -36,8 +36,9 @@ namespace RFLOT.Infrastructure.Report.Migrations
                     b.Property<DateTimeOffset>("DateTimeStart")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("IdPlane")
-                        .HasColumnType("uuid");
+                    b.Property<string>("IdPlane")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("StatusReport")
                         .HasColumnType("boolean");

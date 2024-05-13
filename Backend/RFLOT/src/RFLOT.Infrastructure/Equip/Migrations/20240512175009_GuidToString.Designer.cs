@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RFLOT.Infrastructure.Equip;
@@ -11,9 +12,11 @@ using RFLOT.Infrastructure.Equip;
 namespace RFLOT.Infrastructure.Equip.Migrations
 {
     [DbContext(typeof(EquipDbContext))]
-    partial class EquipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240512175009_GuidToString")]
+    partial class GuidToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -6,7 +6,7 @@ namespace RFLOT.Application.Equip.Command;
 
 public class CheckEquipCommand : IRequest<EquipInfo>
 {
-    public CheckEquipCommand(Guid idEquip, Status statusEquip, Guid idZone, Guid idReport, Guid idUser)
+    public CheckEquipCommand(string idEquip, Status statusEquip, Guid idZone, Guid idReport, Guid idUser)
     {
         IdEquip = idEquip;
         StatusEquip = statusEquip;
@@ -15,7 +15,7 @@ public class CheckEquipCommand : IRequest<EquipInfo>
         IdUser = idUser;
     }
 
-    public Guid IdEquip { get; }
+    public string IdEquip { get; }
     public Status StatusEquip { get; }
     public Guid IdZone { get; }
     public Guid IdReport { get; }

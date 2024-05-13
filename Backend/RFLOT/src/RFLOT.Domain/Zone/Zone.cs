@@ -1,17 +1,17 @@
-﻿using RFLOT.Common.Domain.Entity;
+﻿using RFLOT.Common.Domain;
 
 namespace RFLOT.Domain.Zone;
 
-public class Zone : IEntity<Guid>
+public class Zone : Entity<Guid>
 {
-    public Zone(Guid id, Guid idPlane, string name)
+    public Zone(Guid id, string idPlane, string name)
     {
         Id = id;
         IdPlane = idPlane;
         Name = name;
     }
 
-    public Guid IdPlane { get; private set; }
+    public string IdPlane { get; private set; }
     public string Name { get; private set;}
 
     public Guid Id { get; private set;}

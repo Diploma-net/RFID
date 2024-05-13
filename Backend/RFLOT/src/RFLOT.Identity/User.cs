@@ -1,8 +1,8 @@
-﻿using RFLOT.Common.Domain.Entity;
+﻿using RFLOT.Common.Domain;
 
 namespace RFLOT.Identity;
 
-public class User : IEntity<Guid>
+public class User : Entity<Guid>
 {
     public Guid Id { get; private set; }
     public string Login { get; private set; }

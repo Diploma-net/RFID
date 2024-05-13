@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RFLOT.Infrastructure.Equip;
@@ -19,7 +20,7 @@ public static class IoC
         );
         services.AddDbContext<ZoneDbContext>(
             options => options.UseNpgsql(
-                configuration.GetConnectionString("ZonesConnection")
+                configuration.GetConnectionString("ZoneConnection")
             )
         );
         services.AddDbContext<PlaneDbContext>(

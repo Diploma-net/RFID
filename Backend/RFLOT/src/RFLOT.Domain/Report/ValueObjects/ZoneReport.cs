@@ -31,7 +31,7 @@ public class ZoneReport : ValueObject
         _checkers.Add(new Checker(idUser, DateTimeOffset.Now));
     }
 
-    public void AddCheckedEquip(Guid idEquip, Status status, string space, Guid idUser)
+    public void AddCheckedEquip(string idEquip, Status status, string space, Guid idUser)
     {
         _equipReports.Add(new EquipReport(idEquip, status, space, DateTimeOffset.Now, idUser));
     }

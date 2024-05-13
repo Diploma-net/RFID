@@ -28,8 +28,9 @@ namespace RFLOT.Infrastructure.Zone.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("IdPlane")
-                        .HasColumnType("uuid");
+                    b.Property<string>("IdPlane")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -5,7 +5,7 @@ namespace RFLOT.Domain.Equip.Events;
 
 public class EquipChecked : INotification
 {
-    public EquipChecked(Guid idEquip, Status status, Guid idReport, Guid idZone, Guid idUser)
+    public EquipChecked(string idEquip, Status status, Guid idReport, Guid idZone, Guid idUser)
     {
         IdEquip = idEquip;
         Status = status;
@@ -14,7 +14,7 @@ public class EquipChecked : INotification
         IdUser = idUser;
     }
 
-    public Guid IdEquip { get; }
+    public string IdEquip { get; }
     public Status Status { get; }
     public Guid IdReport { get; }
     public Guid IdZone { get; }

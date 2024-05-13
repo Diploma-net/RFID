@@ -20,7 +20,7 @@ public static class EquipEndpoints
             });
 
         endpoints.MapGet("/check",
-            async (IMediator mediator, Guid idEquip, Status statusEquip, Guid idZone, Guid idReport, Guid idUser) =>
+            async (IMediator mediator, string idEquip, Status statusEquip, Guid idZone, Guid idReport, Guid idUser) =>
             {
                 var result = await mediator.Send(new CheckEquipCommand(idEquip, statusEquip, idZone, idReport, idUser));
                 return Results.Ok(result);

@@ -1,21 +1,19 @@
-﻿using RFLOT.Common.Domain.DomainEvents;
-using RFLOT.Common.Domain.Entity;
+﻿using RFLOT.Common.Domain;
 using RFLOT.Domain.Equip.Events;
 using RFLOT.Domain.Equip.ValueObjects;
 using Type = RFLOT.Domain.Equip.ValueObjects.Type;
 
 namespace RFLOT.Domain.Equip;
 
-public class Equip : DomainEventEntity, IEntity<Guid>
+public class Equip : Entity<string>
 {
     private Equip()
     {
     }
 
-    public Equip(Guid id, Guid? zoneId, string space, string name, Type type, DateTimeOffset dateTimeStart,
+    public Equip(Guid? zoneId, string space, string name, Type type, DateTimeOffset dateTimeStart,
         DateTimeOffset dateTimeEnd, Status lastStatus)
     {
-        Id = id;
         ZoneId = zoneId;
         Space = space;
         Name = name;
@@ -25,7 +23,6 @@ public class Equip : DomainEventEntity, IEntity<Guid>
         LastStatus = lastStatus;
     }
 
-    public Guid Id { get; private set; }
     public Guid? ZoneId { get; private set; }
     public string? Space { get; private set; }
     public string Name { get; private set; }

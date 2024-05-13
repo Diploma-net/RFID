@@ -1,8 +1,5 @@
-using RFLOT.Common.Domain.Entity;
-
 namespace RFLOT.Common.Domain;
 
-public interface IAggregateRoot<T> : IEntity<T>
+public abstract class AggregateRoot<T> : Entity<T>
 {
-    public T Id { get; }
 }

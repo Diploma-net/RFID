@@ -9,7 +9,7 @@ public class EquipReport : ValueObject
     {
         
     }
-    public EquipReport(Guid idEquip, Status status, string space, DateTimeOffset dateTimeCheck, Guid idUser)
+    public EquipReport(string idEquip, Status status, string space, DateTimeOffset dateTimeCheck, Guid idUser)
     {
         IdEquip = idEquip;
         Status = status;
@@ -18,7 +18,7 @@ public class EquipReport : ValueObject
         IdUser = idUser;
     }
 
-    public Guid IdEquip { get; }
+    public string IdEquip { get; }
     public Status Status { get; }
     public string Space { get; }
     public DateTimeOffset DateTimeCheck { get; }

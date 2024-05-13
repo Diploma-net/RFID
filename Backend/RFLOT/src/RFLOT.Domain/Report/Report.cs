@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using RFLOT.Common.Domain;
-using RFLOT.Common.Domain.DomainEvents;
+﻿using RFLOT.Common.Domain;
 using RFLOT.Domain.Equip.ValueObjects;
 using RFLOT.Domain.Report.Events;
 using RFLOT.Domain.Report.ValueObjects;
 
 namespace RFLOT.Domain.Report;
 
-public class Report : DomainEventEntity, IAggregateRoot<Guid>
+public class Report : AggregateRoot<Guid>
 {
     private List<ZoneReport> _zoneReports = new();
 
@@ -15,16 +13,15 @@ public class Report : DomainEventEntity, IAggregateRoot<Guid>
     {
     }
 
-    public Report(Guid idPlane, ReportType type)
+    public Report(string idPlane, ReportType type)
     {
         Id = Guid.NewGuid();
         IdPlane = idPlane;
         Type = type;
-        DateTimeStart = DateTimeOffset.Now;
+        DateTimeStart = DateTimeOffset.UtcNow;
         StatusReport = true;
     }
-    public Guid Id { get; private set; }
-    public Guid IdPlane { get; private set; }
+    public string IdPlane { get; private set; }
     public ReportType Type { get; private set; }
     public DateTimeOffset DateTimeStart { get; private set; }
     public DateTimeOffset? DateTimeFinish { get; private set;}
@@ -51,7 +48,7 @@ public class Report : DomainEventEntity, IAggregateRoot<Guid>
         }
     }
 
-    public void AddCheckedEquip(Guid idZone, Guid idEquip, Status status, string space, Guid idUser)
+    public void AddCheckedEquip(Guid idZone, string idEquip, Status status, string space, Guid idUser)
     {
         var zoneReport = _zoneReports.FirstOrDefault(z => z.IdZone == idZone);
         zoneReport.AddCheckedEquip(idEquip, status, space, idUser);

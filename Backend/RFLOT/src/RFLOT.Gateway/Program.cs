@@ -38,6 +38,7 @@ app.UseHttpsRedirection();
 app.MapHub<MonitoringHub>("/hub");
 app.AddAuthEndpoints();
 app.AddEquipEndpoints();
+app.AddPlaneEndpoints();
 app.AddZoneEndpoints();
 
 app.Run();
