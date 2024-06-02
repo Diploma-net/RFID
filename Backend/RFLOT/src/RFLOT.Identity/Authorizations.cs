@@ -12,15 +12,15 @@ public class Authorizations : IAuthorization
         _context = context;
     }
 
-    public async Task<Guid?> Authorization(string login, string password)
+    public async Task<(Guid, string)?> Authorization(string login, string password)
     {
         var user = await _context.Users.FirstAsync(u => u.Login == login && u.Password == password);
-        return user.Id;
+        return new ValueTuple<Guid, string>(user.Id, user.FullName);
     }
 
-    public async Task<Guid?> Authorization(string rfid)
+    public async Task<(Guid, string)?> Authorization(string rfid)
     {
         var user = await _context.Users.FirstAsync(u => u.Rfid == rfid);
-        return user.Id;
+        return new ValueTuple<Guid, string>(user.Id, user.FullName);
     }
 }

@@ -3,12 +3,8 @@ using RFLOT.Domain.Equip.ValueObjects;
 
 namespace RFLOT.Domain.Report.ValueObjects;
 
-public class EquipReport : ValueObject
+public class EquipReport
 {
-    private EquipReport()
-    {
-        
-    }
     public EquipReport(string idEquip, Status status, string space, DateTimeOffset dateTimeCheck, Guid idUser)
     {
         IdEquip = idEquip;
@@ -18,16 +14,10 @@ public class EquipReport : ValueObject
         IdUser = idUser;
     }
 
-    public string IdEquip { get; }
-    public Status Status { get; }
-    public string Space { get; }
-    public DateTimeOffset DateTimeCheck { get; }
-    public Guid IdUser { get;  }
-
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return IdEquip;
-        yield return Status;
-        yield return Space;
-    }
+    public string IdEquip { get; set; }
+    public Status Status { get; set; }
+    public string Space { get; set; }
+    public DateTimeOffset DateTimeCheck { get; set; }
+    public Guid IdUser { get; set; }
+    
 }

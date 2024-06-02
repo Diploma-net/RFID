@@ -7,8 +7,9 @@ public class Plane : Entity<string>
     {
     }
 
-    public Plane(string name)
+    public Plane(string id, string name)
     {
+        Id = id;
         Name = name;
     }
 

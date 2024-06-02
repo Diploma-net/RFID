@@ -11,9 +11,10 @@ public class Equip : Entity<string>
     {
     }
 
-    public Equip(Guid? zoneId, string space, string name, Type type, DateTimeOffset dateTimeStart,
+    public Equip(string id, Guid? zoneId, string space, string name, Type type, DateTimeOffset dateTimeStart,
         DateTimeOffset dateTimeEnd, Status lastStatus)
     {
+        Id = id;
         ZoneId = zoneId;
         Space = space;
         Name = name;

@@ -32,7 +32,7 @@ namespace RFLOT.Infrastructure.Plane.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Planes");
+                    b.ToTable("Planes", (string)null);
                 });
 #pragma warning restore 612, 618
         }

@@ -52,7 +52,7 @@ namespace RFLOT.Infrastructure.Report.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Reports", (string)null);
                 });
 #pragma warning restore 612, 618
         }

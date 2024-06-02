@@ -13,5 +13,6 @@ public class ReportConfiguration : IEntityTypeConfiguration<Domain.Report.Report
         entityTypeBuilder.Property(e => e.ZoneReports).HasColumnType("jsonb").HasConversion(
             v => JsonConvert.SerializeObject(v),
             v => JsonConvert.DeserializeObject<List<ZoneReport>>(v));
+        
     }
 }

@@ -19,11 +19,19 @@ public static class EquipEndpoints
                 return Results.Ok();
             });
 
-        endpoints.MapGet("/check",
-            async (IMediator mediator, string idEquip, Status statusEquip, Guid idZone, Guid idReport, Guid idUser) =>
+        endpoints.MapPost("/check",
+            async (IMediator mediator, CheckEquipDto checkEquipDto) =>
             {
-                var result = await mediator.Send(new CheckEquipCommand(idEquip, statusEquip, idZone, idReport, idUser));
-                return Results.Ok(result);
+                var result = await mediator.Send(new CheckEquipCommand(checkEquipDto.IdEquip, checkEquipDto.StatusEquip,
+                    checkEquipDto.IdZone, checkEquipDto.IdReport, checkEquipDto.IdUser));
+                return Results.Ok(new {EquipInfo = result});
+            });
+        
+        endpoints.MapPost("/exit-check",
+            async (IMediator mediator, EquipExitCheckDto equipExitCheckDto) =>
+            {
+                var result = await mediator.Send(new EquipExitCheckCommand(equipExitCheckDto.IdEquip));
+                return result != null ? Results.Ok(new {EquipInfo = result}) : Results.NotFound();
             });
 
         return app;

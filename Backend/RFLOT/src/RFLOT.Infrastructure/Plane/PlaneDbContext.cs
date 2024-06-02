@@ -22,6 +22,7 @@ public class PlaneDbContext : DbContext, IEventPublisher
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         optionsBuilder.EnableSensitiveDataLogging();
         if (!optionsBuilder.IsConfigured) throw new InvalidOperationException("Context was not configured");
 
@@ -32,5 +33,11 @@ public class PlaneDbContext : DbContext, IEventPublisher
         await _mediator.DispatchDomainEventsAsync<string>(this);
         var result = await base.SaveChangesAsync(cancellationToken);
         return result;
+    }
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder
+            .Properties<DateTimeOffset>()
+            .HaveConversion<DateTimeOffsetConverter>();
     }
 }

@@ -2,6 +2,6 @@
 
 public interface IAuthorization
 {
-    public Task<Guid?> Authorization(string login, string password);
-    public Task<Guid?> Authorization(string rfid);
+    public Task<(Guid, string)?> Authorization(string login, string password);
+    public Task<(Guid, string)?> Authorization(string rfid);
 }

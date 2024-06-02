@@ -2,26 +2,16 @@
 
 namespace RFLOT.Domain.Report.ValueObjects;
 
-public class Checker : ValueObject
+public class Checker
 {
-    private Checker()
-    {
-        
-    }
-    public Checker(Guid idUser, DateTimeOffset dateTimeStart)
+    public Checker(Guid idUser, DateTimeOffset? dateTimeStart)
     {
         IdUser = idUser;
         DateTimeStart = dateTimeStart;
     }
 
-    public Guid IdUser { get; }
-    public DateTimeOffset? DateTimeStart { get; }
+    public Guid IdUser { get; set; }
+    public DateTimeOffset? DateTimeStart { get; set; }
     public DateTimeOffset? DateTimeFinish { get; set; }
-    
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return IdUser;
-        yield return DateTimeStart;
-        yield return DateTimeFinish;
-    }
+   
 }

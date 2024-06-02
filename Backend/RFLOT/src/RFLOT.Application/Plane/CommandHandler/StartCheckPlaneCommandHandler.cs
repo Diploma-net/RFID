@@ -28,5 +28,4 @@ public class StartCheckPlaneCommandHandler : IRequestHandler<StartCheckPlaneComm
         await _reportDbContext.SaveChangesAsync(cancellationToken);
         return newReport.Id;
     }
-
 }

@@ -51,7 +51,7 @@ namespace RFLOT.Infrastructure.Equip.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Equips");
+                    b.ToTable("Equips", (string)null);
                 });
 #pragma warning restore 612, 618
         }

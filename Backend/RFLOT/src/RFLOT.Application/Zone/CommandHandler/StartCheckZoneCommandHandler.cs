@@ -29,6 +29,7 @@ public class StartCheckZoneCommandHandler : IRequestHandler<StartCheckZoneComman
             await _reportContext.Reports.FirstOrDefaultAsync(r => r.Id == command.IdReport,
                 cancellationToken: cancellationToken);
         report.StartZoneReport(command.IdZone, command.IdUser);
+        _reportContext.Update(report);
         await _reportContext.SaveChangesAsync(cancellationToken);
         var zone = await _zoneDbContext.Zones.FirstOrDefaultAsync(z => z.Id == command.IdZone,
             cancellationToken: cancellationToken);

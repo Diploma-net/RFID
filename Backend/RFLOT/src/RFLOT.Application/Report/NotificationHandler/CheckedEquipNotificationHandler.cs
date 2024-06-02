@@ -25,6 +25,7 @@ public class CheckedEquipNotificationHandler : INotificationHandler<EquipChecked
             cancellationToken: cancellationToken);
         report.AddCheckedEquip(notification.IdZone, notification.IdEquip, notification.Status, equip.Space,
             notification.IdUser);
+        _reportDbContext.Update(report);
         await _reportDbContext.SaveChangesAsync(cancellationToken);
     }
 }

@@ -38,7 +38,7 @@ namespace RFLOT.Infrastructure.Zone.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Zones");
+                    b.ToTable("Zones", (string)null);
                 });
 #pragma warning restore 612, 618
         }

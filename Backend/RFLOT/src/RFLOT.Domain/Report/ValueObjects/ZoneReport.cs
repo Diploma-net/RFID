@@ -11,29 +11,23 @@ public class ZoneReport : ValueObject
     }
 
     public Guid IdZone { get; set; }
-    private List<EquipReport> _equipReports = new();
-    private List<Checker> _checkers = new();
-
-    public IEnumerable<EquipReport> EquipReports
-    {
-        get => _equipReports?.ToList();
-        internal set => _equipReports = value?.ToList();
-    }
-
-    public IEnumerable<Checker> Checkers
-    {
-        get => _checkers?.ToList();
-        internal set => _checkers = value?.ToList();
-    }
+    public List<EquipReport> EquipReports = new();
+    public List<Checker> Checkers = new();
+    
 
     public void AddChecker(Guid idUser)
     {
-        _checkers.Add(new Checker(idUser, DateTimeOffset.Now));
+        Checkers.Add(new Checker(idUser, DateTimeOffset.Now));
+    }
+    public void DeleteChecker(Guid idUser)
+    {
+        var checker = Checkers.FirstOrDefault(c => c.IdUser == idUser);
+        checker.DateTimeFinish = DateTimeOffset.UtcNow;
     }
 
     public void AddCheckedEquip(string idEquip, Status status, string space, Guid idUser)
     {
-        _equipReports.Add(new EquipReport(idEquip, status, space, DateTimeOffset.Now, idUser));
+        EquipReports.Add(new EquipReport(idEquip, status, space, DateTimeOffset.Now, idUser));
     }
 
     protected override IEnumerable<object> GetEqualityComponents()
