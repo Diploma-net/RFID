@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFLOT.Identity", "src\RFLOT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFLOT.BackgroundTasks", "src\RFLOT.BackgroundTasks\RFLOT.BackgroundTasks.csproj", "{3B8B81EF-EB44-4789-A0C1-91EE832296A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFLOT.AuditEvents", "RFLOT.AuditEvents\RFLOT.AuditEvents.csproj", "{B1AC738B-7456-45C7-8FD1-730BD8CAFE4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{3B8B81EF-EB44-4789-A0C1-91EE832296A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B8B81EF-EB44-4789-A0C1-91EE832296A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B8B81EF-EB44-4789-A0C1-91EE832296A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1AC738B-7456-45C7-8FD1-730BD8CAFE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1AC738B-7456-45C7-8FD1-730BD8CAFE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1AC738B-7456-45C7-8FD1-730BD8CAFE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1AC738B-7456-45C7-8FD1-730BD8CAFE4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

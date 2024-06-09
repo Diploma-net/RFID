@@ -14,7 +14,8 @@ public class CheckEquipCommandHandler : IRequestHandler<CheckEquipCommand, Equip
     private readonly ReportDbContext _reportDbContext;
     private readonly ZoneDbContext _zoneDbContext;
 
-    public CheckEquipCommandHandler(EquipDbContext equipDbContext, ReportDbContext reportDbContext, ZoneDbContext zoneDbContext)
+    public CheckEquipCommandHandler(EquipDbContext equipDbContext, ReportDbContext reportDbContext,
+        ZoneDbContext zoneDbContext)
     {
         _equipDbContext = equipDbContext;
         _reportDbContext = reportDbContext;
@@ -30,14 +31,16 @@ public class CheckEquipCommandHandler : IRequestHandler<CheckEquipCommand, Equip
         equip.CheckEquip(command.StatusEquip, command.IdReport, command.IdZone, command.IdUser);
         _equipDbContext.Update(equip);
         await _equipDbContext.SaveChangesAsync(cancellationToken);
-        var report = await _reportDbContext.Reports.FirstOrDefaultAsync(r => r.Id == command.IdReport, cancellationToken: cancellationToken);
+        var report = await _reportDbContext.Reports.FirstOrDefaultAsync(r => r.Id == command.IdReport,
+            cancellationToken: cancellationToken);
         var countEquip = 0;
         var zones = _zoneDbContext.Zones.Where(z => z.IdPlane == report.IdPlane);
         foreach (var zone in zones)
         {
-           countEquip += _equipDbContext.Equips.Count(e => e.ZoneId == zone.Id);
+            countEquip += _equipDbContext.Equips.Count(e => e.ZoneId == zone.Id);
         }
-        if (report.ZoneReports.Select(z => z.EquipReports.Count).Count() >=  countEquip)
+
+        if (report.ZoneReports.Select(z => z.EquipReports.Count).Count() >= countEquip)
         {
             report.StatusReport = false;
         }

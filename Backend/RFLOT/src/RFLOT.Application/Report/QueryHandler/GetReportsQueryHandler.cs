@@ -36,7 +36,7 @@ public class GetReportsQueryHandler : IRequestHandler<GetReportsQuery, List<GetR
 
         if (query.ReportDate != null)
         {
-            reports = reports.Where(r => new DateOnly(r.DateTimeStart.Year, r.DateTimeStart.Month, r.DateTimeStart.Day) == query.ReportDate);
+            reports = reports.Where(r => new DateOnly(r.DateTimeStart.Year, r.DateTimeStart.Month, r.DateTimeStart.Day) == DateOnly.Parse(query.ReportDate));
         }
 
         var result = new List<GetReports>();

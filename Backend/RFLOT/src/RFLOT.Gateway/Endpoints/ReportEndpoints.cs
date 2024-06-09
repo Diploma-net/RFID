@@ -14,7 +14,7 @@ public static class ReportEndpoints
         var endpoints = app.MapGroup("/report");
 
         endpoints.MapGet("/get-reports",
-            async (IMediator mediator, bool reportResult, string? planeName, DateOnly? reportDate, ReportType? reportType) =>
+            async (IMediator mediator, bool reportResult, string? planeName, string? reportDate, ReportType? reportType) =>
             {
                 try
                 {

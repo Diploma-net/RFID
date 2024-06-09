@@ -20,5 +20,5 @@ public class User : Entity<Guid>
     public string Login { get; private set; }
     public string Password { get; private set; }
     public string? Rfid { get; private set; }
-    public string FullName { get; private set; }
+    public string FullName { get; set; }
 }

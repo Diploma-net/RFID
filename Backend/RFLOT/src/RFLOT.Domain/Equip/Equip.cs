@@ -31,6 +31,7 @@ public class Equip : Entity<string>
     public DateTimeOffset DateTimeStart { get; private set; }
     public DateTimeOffset? DateTimeEnd { get; private set; }
     public Status LastStatus { get; set; }
+    
 
 
     public string GetStatusString()

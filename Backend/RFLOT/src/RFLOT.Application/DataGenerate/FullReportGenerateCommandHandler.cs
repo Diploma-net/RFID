@@ -30,10 +30,10 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
 
     private readonly string[] EquipsSpaceInBusiness =
     [
-        "A1", "B1", "E1", "F1",
-        "A2", "B2", "E2", "F2",
-        "A3", "B3", "E3", "F3",
-        "A4", "B4", "E4", "F4"
+        "A1", "B1", "C1", "D1",
+        "A2", "B2", "C2", "D2",
+        "A3", "B3", "C3", "D3",
+        "A4", "B4", "C4", "D4"
     ];
 
     private readonly string[] EquipsSpaceInEconomy =
@@ -64,6 +64,78 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         "A33", "B33", "C33", "D33", "E33", "F33"
     ];
 
+    private readonly string[] RandomPlaneNames =
+    [
+        "Phoenix", "Aurora", "Thunderbird", "Wingspan", "Skyhawk",
+        "Silverbird", "Gravity", "Starlight", "Bluebird", "Firefly",
+        "Falcon", "Stratosphere", "Moonlight", "Dreamliner", "Rainbow",
+        "Soaring Eagle", "Spirit", "Sunrise", "Sundancer", "Infinity",
+        "Cirrus", "Celestial", "Galaxy", "Pegasus", "Solar Flare",
+        "Dragonfly", "Luminous", "Empyrean", "Aerospace", "Nimbus",
+        "Jetstream", "Jupiter", "Hope", "Radiance", "Aerostar", "Velocity",
+        "Altitude", "Constellation", "Eclipse", "Skylark", "Zenith",
+        "Majestic", "Stardust", "Harmony", "Icarus", "Orion",
+        "Aerodynamic", "Voyager", "Flightpath", "Pantheon", "Horizon",
+        "Nebula", "Aether", "Avalon", "Serenity", "AeroMax",
+        "Supernova", "Comet", "Astraeus", "Perseus", "Solaris",
+        "Venture", "Genesis", "AeroWing", "Fury", "Ascend",
+        "Quasar", "Lyra", "Auriga", "Equinox", "Apollo",
+        "Cascade", "Astrojet", "Stellar", "AeroDream", "Vortex",
+        "Vector", "AeroLux", "Endeavor", "Nova", "EagleEye",
+        "Infinity", "Horizon", "AeroFlash", "Soar", "Polaris",
+        "Infinite Flight", "Starjet", "Silverstreak", "Firefly", "Cosmic",
+        "Radiance", "Nighthawk"
+    ];
+
+    private readonly string[] RandomNames =
+    [
+        "Александр", "Иван", "Дмитрий", "Сергей", "Андрей",
+        "Михаил", "Артем", "Павел", "Евгений", "Николай",
+        "Кирилл", "Олег", "Максим", "Алексей", "Владимир",
+        "Антон", "Валерий", "Григорий", "Денис", "Юрий",
+        "Игорь", "Станислав", "Борис", "Глеб", "Роман",
+        "Гарри", "Захар", "Леонид", "Арсений", "Федор",
+        "Константин", "Тимофей", "Егор", "Александр", "Илья",
+        "Даниил", "Никита", "Семен", "Василий", "Евгений",
+        "Александр", "Артем", "Матвей", "Вадим", "Дмитрий",
+        "Сергей", "Иван", "Андрей", "Максим", "Петр",
+        "Егор", "Никита", "Евгений", "Денис", "Константин",
+        "Даниил", "Алексей", "Георгий", "Владислав", "Антон",
+        "Артем", "Сергей", "Игорь", "Федор", "Роман",
+        "Илья", "Борис", "Артур", "Степан", "Валентин",
+        "Аркадий", "Василий", "Михаил", "Юрий", "Дмитрий",
+        "Валерий", "Николай", "Марк", "Кирилл", "Евгений",
+        "Александр", "Иван", "Артем", "Андрей", "Михаил",
+        "Павел", "Олег", "Григорий", "Арсений", "Алексей",
+        "Игорь", "Станислав", "Дмитрий", "Егор", "Николай",
+        "Илья", "Александр", "Роман", "Алексей", "Даниил",
+        "Владимир", "Сергей", "Константин", "Никита", "Денис",
+        "Федор", "Кирилл"
+    ];
+
+    private readonly string[] RandomSurnames =
+    [
+        "Иванов", "Петров", "Смирнов", "Кузнецов", "Попов",
+        "Васильев", "Соколов", "Михайлов", "Новиков", "Федоров",
+        "Морозов", "Волков", "Алексеев", "Лебедев", "Семенов",
+        "Егоров", "Павлов", "Козлов", "Степанов", "Николаев",
+        "Орлов", "Андреев", "Макаров", "Никитин", "Захаров",
+        "Зайцев", "Соловьев", "Борисов", "Яковлев", "Григорьев",
+        "Романов", "Воробьев", "Сергеев", "Куликов", "Беляев",
+        "Карпов", "Исаев", "Ткачев", "Абрамов", "Родионов",
+        "Баранов", "Кириллов", "Коновалов", "Жуков", "Александров",
+        "Лазарев", "Медведев", "Ершов", "Данилов", "Герасимов",
+        "Марков", "Прохоров", "Матвеев", "Елисеев", "Тимофеев",
+        "Филиппов", "Крылов", "Максимов", "Сидоров", "Осипов",
+        "Давыдов", "Анисимов", "Алексеев", "Фомин", "Панов",
+        "Власов", "Тихонов", "Кузьмин", "Миронов", "Федотов",
+        "Устинов", "Игнатьев", "Лысенко", "Богданов", "Краснов",
+        "Цветков", "Дементьев", "Гаврилов", "Горбачев", "Ермаков",
+        "Калашников", "Колесников", "Лазарев", "Трофимов", "Архипов",
+        "Владимиров", "Аксенов", "Гусев", "Марков", "Юдин",
+        "Кудрявцев", "Бирюков", "Гордеев", "Савельев"
+    ];
+
 
     public FullReportGenerateCommandHandler(ReportDbContext reportDbContext, PlaneDbContext planeDbContext,
         EquipDbContext equipDbContext, ZoneDbContext zoneDbContext, UserDbContext userDbContext)
@@ -92,20 +164,29 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
             await _reportDbContext.SaveChangesAsync(cancellationToken);
             reports.Add(report);
         }
+
         return reports;
     }
 
     private async Task<List<Guid>> GenerateUsers(CancellationToken cancellationToken)
     {
-        var newUsers = _fixture.CreateMany<User>(UsersInPlane);
-        await _userDbContext.Users.AddRangeAsync(newUsers, cancellationToken);
-        return newUsers.Select(u => u.Id).ToList();
+        var newUsers = new List<Guid>();
+        for (int i = 0; i < UsersInPlane; i++)
+        {
+            var newUser = _fixture.Create<User>();
+            newUser.FullName = $"{RandomSurnames[new Random().Next(0, RandomSurnames.Length - 1)]} {RandomNames[new Random().Next(0, RandomNames.Length - 1)]}";
+            await _userDbContext.Users.AddAsync(newUser, cancellationToken);
+            newUsers.Add(newUser.Id);
+        }
+
+        return newUsers;
     }
 
     private async Task<string> GeneratePlane(CancellationToken cancellationToken)
     {
         var newPlane = _fixture.Create<Domain.Plane.Plane>();
-        await _planeDbContext.Planes.AddAsync(newPlane, cancellationToken);
+        newPlane.Name = $"{RandomPlaneNames[new Random().Next(0, RandomPlaneNames.Length - 1)]}-{new Random().Next(1, 200)}";
+            await _planeDbContext.Planes.AddAsync(newPlane, cancellationToken);
         return newPlane.Id;
     }
 
@@ -146,7 +227,7 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         {
             var newEquip = new Domain.Equip.Equip(_fixture.Create<string>(), idZones.Item1, EquipsSpaceInBusiness[i],
                 _fixture.Create<string>(), _fixture.Create<Type>(), _fixture.Create<DateTimeOffset>(),
-                _fixture.Create<DateTimeOffset>(), (Status)new Random().Next(0,5));
+                _fixture.Create<DateTimeOffset>(), (Status)new Random().Next(0, 5));
             await _equipDbContext.Equips.AddAsync(newEquip, cancellationToken);
             newEquips.Item1.Add(newEquip.Id);
         }
@@ -160,7 +241,7 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
                 var newEquip = new Domain.Equip.Equip(_fixture.Create<string>(), idZones.Item2[i],
                     EquipsSpaceInEconomy[spaces],
                     _fixture.Create<string>(), _fixture.Create<Type>(), _fixture.Create<DateTimeOffset>(),
-                    _fixture.Create<DateTimeOffset>(), (Status)new Random().Next(0,5));
+                    _fixture.Create<DateTimeOffset>(), (Status)new Random().Next(0, 5));
                 await _equipDbContext.Equips.AddAsync(newEquip, cancellationToken);
                 newEquips.Item2.Add(newEquip.Id);
                 spaces++;
@@ -174,84 +255,86 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         (Guid, List<Guid>) idZones,
         (List<string>, List<string>) equips, CancellationToken cancellationToken)
     {
-            var dateStart = _fixture.Create<DateTimeOffset>();
-            var dateFinish = dateStart.AddHours(1);
-            var listZoneReports = new List<ZoneReport>();
-            var equipsBusinessChecks = new List<EquipReport>();
-            //Бизнес
-            var businessZone = new ZoneReport(idZones.Item1);
-            var userTimeInfo = new List<(Guid, DateTimeOffset)>();
+        var dateStart = _fixture.Create<DateTimeOffset>();
+        var dateFinish = dateStart.AddHours(1);
+        var listZoneReports = new List<ZoneReport>();
+        var equipsBusinessChecks = new List<EquipReport>();
+        //Бизнес
+        var businessZone = new ZoneReport(idZones.Item1);
+        var userTimeInfo = new List<(Guid, DateTimeOffset)>();
+        foreach (var user in users)
+        {
+            var dateStartCheck = new Random().Next(1, 10);
+            var checker = new Checker(user, dateStart)
+            {
+                DateTimeFinish = dateStart.AddMinutes(dateStartCheck)
+            };
+            businessZone.Checkers.Add(checker);
+            userTimeInfo.Add(new ValueTuple<Guid, DateTimeOffset>(user, checker.DateTimeFinish.Value));
+        }
+
+        foreach (var equip in equips.Item1)
+        {
+            var equipInfo =
+                await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == equip,
+                    cancellationToken: cancellationToken);
+            var randomUser = userTimeInfo[new Random().Next(0, userTimeInfo.Count - 1)];
+            var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0, 5), equipInfo.Space,
+                randomUser.Item2.AddMinutes(new Random().Next(1, 20)), randomUser.Item1);
+            equipsBusinessChecks.Add(equipCheck);
+        }
+
+        businessZone.EquipReports = equipsBusinessChecks;
+        listZoneReports.Add(businessZone);
+        //Эконом
+        var zonesEquipsCreate = 0;
+        foreach (var idZone in idZones.Item2)
+        {
+            var allEquip = equips.Item2.Count;
+            var countCheck = 0;
+            var randomCheckTime = 10;
+            var economyZone = new ZoneReport(idZone);
+            var equipsEconomyChecks = new List<EquipReport>();
+            var userTimeInfoEconomy = new List<(Guid, DateTimeOffset)>();
+            var dateStartCheck = _fixture.Create<DateTimeOffset>().AddMinutes(10);
             foreach (var user in users)
             {
-                var dateStartCheck = new Random().Next(1, 10);
-                var checker = new Checker(user, dateStart)
+                var dateStartCheckRandom = new Random().Next(randomCheckTime, randomCheckTime + 8);
+                var checker = new Checker(user, dateStart.AddMinutes(20 * (countCheck + 1)))
                 {
-                    DateTimeFinish = dateStart.AddMinutes(dateStartCheck)
+                    DateTimeFinish = dateStart.AddMinutes(dateStartCheckRandom)
                 };
-                businessZone.Checkers.Add(checker);
-                userTimeInfo.Add(new ValueTuple<Guid, DateTimeOffset>(user, checker.DateTimeFinish.Value));
+                economyZone.Checkers.Add(checker);
+                userTimeInfoEconomy.Add(new ValueTuple<Guid, DateTimeOffset>(user, checker.DateTimeFinish.Value));
             }
 
-            foreach (var equip in equips.Item1)
+            var countEquipInZone = 0;
+            for (int z = zonesEquipsCreate; z < allEquip; z++)
             {
+                if (countEquipInZone == 24)
+                {
+                    break;
+                }
+
                 var equipInfo =
-                    await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == equip,
+                    await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == equips.Item2[z],
                         cancellationToken: cancellationToken);
-                var randomUser = userTimeInfo[new Random().Next(0, userTimeInfo.Count - 1)];
-                var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0,5), equipInfo.Space,
+                var randomUser = userTimeInfoEconomy[new Random().Next(0, userTimeInfoEconomy.Count - 1)];
+                var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0, 5), equipInfo.Space,
                     randomUser.Item2.AddMinutes(new Random().Next(1, 20)), randomUser.Item1);
-                equipsBusinessChecks.Add(equipCheck);
+                equipsEconomyChecks.Add(equipCheck);
+                countEquipInZone++;
+                zonesEquipsCreate++;
             }
 
-            businessZone.EquipReports = equipsBusinessChecks;
-            listZoneReports.Add(businessZone);
-            //Эконом
-            var zonesEquipsCreate = 0;
-            foreach (var idZone in idZones.Item2)
-            {
-                var allEquip = equips.Item2.Count;
-                var countCheck = 0;
-                var randomCheckTime = 10;
-                var economyZone = new ZoneReport(idZone);
-                var equipsEconomyChecks = new List<EquipReport>();
-                var userTimeInfoEconomy = new List<(Guid, DateTimeOffset)>();
-                var dateStartCheck = _fixture.Create<DateTimeOffset>().AddMinutes(10);
-                foreach (var user in users)
-                {
-                    var dateStartCheckRandom = new Random().Next(randomCheckTime, randomCheckTime + 8);
-                    var checker = new Checker(user, dateStart.AddMinutes(20 * (countCheck + 1)))
-                    {
-                        DateTimeFinish = dateStart.AddMinutes(dateStartCheckRandom)
-                    };
-                    economyZone.Checkers.Add(checker);
-                    userTimeInfoEconomy.Add(new ValueTuple<Guid, DateTimeOffset>(user, checker.DateTimeFinish.Value));
-                }
+            economyZone.EquipReports = equipsEconomyChecks;
+            listZoneReports.Add(economyZone);
+            countCheck++;
+        }
 
-                var countEquipInZone = 0;
-                for (int z = zonesEquipsCreate; z < allEquip; z++)
-                {
-                    if (countEquipInZone == 24)
-                    {
-                        break;
-                    }
-                    var equipInfo =
-                        await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == equips.Item2[z],
-                            cancellationToken: cancellationToken);
-                    var randomUser = userTimeInfoEconomy[new Random().Next(0, userTimeInfoEconomy.Count - 1)];
-                    var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0,5), equipInfo.Space,
-                        randomUser.Item2.AddMinutes(new Random().Next(1, 20)), randomUser.Item1);
-                    equipsEconomyChecks.Add(equipCheck);
-                    countEquipInZone++;
-                    zonesEquipsCreate++;
-                }
-                economyZone.EquipReports = equipsEconomyChecks;
-                listZoneReports.Add(economyZone);
-                countCheck++;
-            }
-
-            var report = new Domain.Report.Report(_fixture.Create<Guid>(), planeId, _fixture.Create<ReportType>(),
-                dateStart, dateFinish, _fixture.Create<bool>(), listZoneReports);
-            await _reportDbContext.Reports.AddAsync(report, cancellationToken);
+        var report = new Domain.Report.Report(_fixture.Create<Guid>(), planeId, _fixture.Create<ReportType>(),
+            dateStart, dateFinish, _fixture.Create<bool>(), listZoneReports);
+        await _reportDbContext.Reports.AddAsync(report, cancellationToken);
         return report.Id;
     }
 }

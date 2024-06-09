@@ -6,7 +6,7 @@ namespace RFLOT.Application.Report.Query;
 
 public class GetReportsQuery : IRequest<List<GetReports>>
 {
-    public GetReportsQuery(bool reportResult, string? planeName, DateOnly? reportDate, ReportType? reportType)
+    public GetReportsQuery(bool reportResult, string? planeName, string? reportDate, ReportType? reportType)
     {
         ReportResult = reportResult;
         PlaneName = planeName;
@@ -16,6 +16,6 @@ public class GetReportsQuery : IRequest<List<GetReports>>
 
     public bool ReportResult { get; }
     public string? PlaneName { get;  }
-    public DateOnly? ReportDate { get;  }
+    public string? ReportDate { get;  }
     public ReportType? ReportType { get; }
 }
