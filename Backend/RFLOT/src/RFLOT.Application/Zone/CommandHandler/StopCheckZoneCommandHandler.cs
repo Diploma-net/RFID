@@ -17,7 +17,8 @@ public class StopCheckZoneCommandHandler : IRequestHandler<StopCheckZoneCommand>
     public async Task Handle(StopCheckZoneCommand command, CancellationToken cancellationToken)
     {
         var report =
-            await _reportContext.Reports.FirstOrDefaultAsync(r => r.Id == command.IdReport,
+            await _reportContext.Reports
+                .FirstOrDefaultAsync(r => r.Id == command.IdReport,
                 cancellationToken: cancellationToken);
         report.StopZoneReport(command.IdZone, command.IdUser);
         _reportContext.Reports.Update(report);

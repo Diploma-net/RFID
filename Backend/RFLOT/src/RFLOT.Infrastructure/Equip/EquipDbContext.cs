@@ -11,7 +11,8 @@ namespace RFLOT.Infrastructure.Equip
     {
         public EquipDbContext(DbContextOptions<EquipDbContext> options, IMediator mediator) : base(options)
         {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _mediator = mediator 
+                        ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         private readonly IMediator _mediator;
@@ -26,7 +27,8 @@ namespace RFLOT.Infrastructure.Equip
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             optionsBuilder.EnableSensitiveDataLogging();
-            if (!optionsBuilder.IsConfigured) throw new InvalidOperationException("Context was not configured");
+            if (!optionsBuilder.IsConfigured) 
+                throw new InvalidOperationException("Context was not configured");
             base.OnConfiguring(optionsBuilder);
         }
 

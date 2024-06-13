@@ -18,7 +18,11 @@ public static class PlaneEndpoints
             {
                 var reportId = await mediator.Send(new StartCheckPlaneCommand(startCheckDto.IdPlane,
                     startCheckDto.IdUser, startCheckDto.TypeCheck));
-                return Results.Ok(new { ReportId = reportId });
+                return Results.Ok(
+                    new
+                    {
+                        ReportId = reportId
+                    });
             });
         endpoints.MapPost("/stop",
             async (IMediator mediator, StopCheckPlaneDto stopCheckPlaneDto) =>

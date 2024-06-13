@@ -11,7 +11,8 @@ public static class IoC
     {
         services.AddDbContext<UserDbContext>(
             options => options.UseNpgsql(
-                configuration.GetConnectionString("IdentityConnection")
+                configuration
+                    .GetConnectionString("IdentityConnection")
             )
         );
         services.AddScoped<IAuthorization, Authorizations>();

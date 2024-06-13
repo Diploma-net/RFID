@@ -14,12 +14,16 @@ public class GetUser : IGetUser
 
     public async Task<string> GetFullNameUser(Guid id)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Id == id);
         return user.FullName;
     }
 
     public async Task<List<string>> GetFullNameUsers(List<Guid> ids)
     {
-        return ids.Select(id => _context.Users.FirstOrDefault(u => u.Id == id).FullName).ToList();
+        return ids
+            .Select(id => _context.Users
+                .FirstOrDefault(u => u.Id == id).FullName)
+            .ToList();
     }
 }

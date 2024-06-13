@@ -15,7 +15,8 @@ public class StopReportCommandHandler : IRequestHandler<StopReportCommand>
 
     public async Task Handle(StopReportCommand command, CancellationToken cancellationToken)
     {
-        var report = _reportDbContext.Reports.FirstOrDefault(r => r.Id == command.IdReport);
+        var report = _reportDbContext.Reports
+            .FirstOrDefault(r => r.Id == command.IdReport);
         report.StatusReport = false;
         await _reportDbContext.SaveChangesAsync(cancellationToken);
     }

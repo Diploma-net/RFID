@@ -26,20 +26,27 @@ public class StartCheckZoneCommandHandler : IRequestHandler<StartCheckZoneComman
     public async Task<OneZoneInfo> Handle(StartCheckZoneCommand command, CancellationToken cancellationToken)
     {
         var report =
-            await _reportContext.Reports.FirstOrDefaultAsync(r => r.Id == command.IdReport,
+            await _reportContext.Reports
+                .FirstOrDefaultAsync(r => r.Id == command.IdReport,
                 cancellationToken: cancellationToken);
         report.StartZoneReport(command.IdZone, command.IdUser);
         _reportContext.Update(report);
         await _reportContext.SaveChangesAsync(cancellationToken);
-        var zone = await _zoneDbContext.Zones.FirstOrDefaultAsync(z => z.Id == command.IdZone,
+        var zone = await _zoneDbContext.Zones
+            .FirstOrDefaultAsync(z => z.Id == command.IdZone,
             cancellationToken: cancellationToken);
-        var equipsResult = (from equipResults in report.ZoneReports.Select(z => z.EquipReports)
+        var equipsResult = (from equipResults in report.ZoneReports
+                .Select(z => z.EquipReports)
             from equipResult in equipResults
-            select new ReportEquipResult { Status = equipResult.Status, Space = equipResult.Space }).ToList();
+            select new ReportEquipResult { Status = equipResult.Status, Space = equipResult.Space })
+            .ToList();
         return new OneZoneInfo
         {
             Name = zone.Name,
-            Spaces = _equipContext.Equips.Where(e => e.ZoneId == command.IdZone).Select(e => e.Space).ToList(),
+            Spaces = _equipContext.Equips
+                .Where(e => e.ZoneId == command.IdZone)
+                .Select(e => e.Space)
+                .ToList(),
             EquipResults = equipsResult
         };
     }

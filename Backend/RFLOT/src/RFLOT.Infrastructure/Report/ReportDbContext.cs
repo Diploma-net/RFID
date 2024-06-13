@@ -11,7 +11,8 @@ public class ReportDbContext : DbContext, IEventPublisher
 {
     public ReportDbContext(DbContextOptions<ReportDbContext> options, IMediator mediator) : base(options)
     {
-        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        _mediator = mediator 
+                    ?? throw new ArgumentNullException(nameof(mediator));
     }
 
     private readonly IMediator _mediator;
@@ -27,16 +28,19 @@ public class ReportDbContext : DbContext, IEventPublisher
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         optionsBuilder.EnableSensitiveDataLogging();
-        if (!optionsBuilder.IsConfigured) throw new InvalidOperationException("Context was not configured");
+        if (!optionsBuilder.IsConfigured) 
+            throw new InvalidOperationException("Context was not configured");
 
         base.OnConfiguring(optionsBuilder);
     }
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         await _mediator.DispatchDomainEventsAsync<Guid>(this);
         var result = await base.SaveChangesAsync(cancellationToken);
         return result;
     }
+
     public override async ValueTask<EntityEntry> AddAsync(object entity,
         CancellationToken cancellationToken = new CancellationToken())
     {
@@ -49,6 +53,7 @@ public class ReportDbContext : DbContext, IEventPublisher
     {
         await Producer<object>.ProduceAsync(entity);
     }
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder

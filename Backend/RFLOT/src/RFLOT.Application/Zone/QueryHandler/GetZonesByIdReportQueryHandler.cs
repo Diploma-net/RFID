@@ -33,29 +33,38 @@ public class GetZonesByIdReportQueryHandler : IRequestHandler<GetZonesByIdReport
     {
         var result = new List<ZonesInfo>();
         var report =
-            await _reportDbContext.Reports.FirstOrDefaultAsync(r => r.Id == query.IdReport,
+            await _reportDbContext.Reports
+                .FirstOrDefaultAsync(r => r.Id == query.IdReport,
                 cancellationToken: cancellationToken);
         if (report == null)
         {
             throw new ApplicationException("Ошибка входа в состояние проверки.");
         }
 
-        var plane = await _planeDbContext.Planes.FirstOrDefaultAsync(p => p.Id == report.IdPlane,
+        var plane = await _planeDbContext.Planes
+            .FirstOrDefaultAsync(p => p.Id == report.IdPlane,
             cancellationToken: cancellationToken);
 
-        var zones = _zoneDbContext.Zones.Where(z => z.IdPlane == plane.Id);
+        var zones = _zoneDbContext.Zones
+            .Where(z => z.IdPlane == plane.Id);
 
         foreach (var zone in zones)
         {
-            if (report.ZoneReports.FirstOrDefault(z => z.IdZone == zone.Id) != null)
+            if (report.ZoneReports
+                    .FirstOrDefault(z => z.IdZone == zone.Id) != null)
             {
-                var thisZone = report.ZoneReports.FirstOrDefault(z => z.IdZone == zone.Id);
+                var thisZone = report.ZoneReports
+                    .FirstOrDefault(z => z.IdZone == zone.Id);
                 result.Add(new ZonesInfo
                 {
                     IdZone = zone.Id,
                     Name = zone.Name,
-                    FullNameChecker = await _getUser.GetFullNameUsers(thisZone.Checkers.Select(z => z.IdUser).ToList()),
-                    Progress = $"{thisZone.EquipReports.Count()}/{_equipDbContext.Equips.Count(e => e.ZoneId == zone.Id)}"
+                    FullNameChecker = await _getUser.GetFullNameUsers(thisZone.Checkers
+                        .Select(z => z.IdUser)
+                        .ToList()),
+                    Progress = $"{thisZone.EquipReports
+                        .Count()}/{_equipDbContext.Equips
+                        .Count(e => e.ZoneId == zone.Id)}"
                 });
             }
             else
@@ -65,7 +74,8 @@ public class GetZonesByIdReportQueryHandler : IRequestHandler<GetZonesByIdReport
                     IdZone = zone.Id,
                     Name = zone.Name,
                     FullNameChecker = null,
-                    Progress = $"0/{_equipDbContext.Equips.Count(e => e.ZoneId == zone.Id)}"
+                    Progress = $"0/{_equipDbContext.Equips
+                        .Count(e => e.ZoneId == zone.Id)}"
                 });
             }
         }

@@ -10,7 +10,8 @@ public static class AnalyticEndpoints
         var endpoints = app.MapGroup("/analytic");
 
         endpoints.MapGet("/global-analytic",
-            async (IMediator mediator) => Results.Ok((object?)await mediator.Send(new GetGlobalAnalyticQuery())));
+            async (IMediator mediator) =>
+                Results.Ok((object?)await mediator.Send(new GetGlobalAnalyticQuery())));
         return app;
     }
 }

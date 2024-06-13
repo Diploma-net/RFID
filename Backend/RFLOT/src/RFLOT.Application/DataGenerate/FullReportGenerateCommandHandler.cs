@@ -174,8 +174,12 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         for (int i = 0; i < UsersInPlane; i++)
         {
             var newUser = _fixture.Create<User>();
-            newUser.FullName = $"{RandomSurnames[new Random().Next(0, RandomSurnames.Length - 1)]} {RandomNames[new Random().Next(0, RandomNames.Length - 1)]}";
-            await _userDbContext.Users.AddAsync(newUser, cancellationToken);
+            newUser.FullName =
+                $"{RandomSurnames[new Random()
+                    .Next(0, RandomSurnames.Length - 1)]} {RandomNames[new Random()
+                    .Next(0, RandomNames.Length - 1)]}";
+            await _userDbContext.Users.
+                AddAsync(newUser, cancellationToken);
             newUsers.Add(newUser.Id);
         }
 
@@ -185,8 +189,12 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
     private async Task<string> GeneratePlane(CancellationToken cancellationToken)
     {
         var newPlane = _fixture.Create<Domain.Plane.Plane>();
-        newPlane.Name = $"{RandomPlaneNames[new Random().Next(0, RandomPlaneNames.Length - 1)]}-{new Random().Next(1, 200)}";
-            await _planeDbContext.Planes.AddAsync(newPlane, cancellationToken);
+        newPlane.Name =
+            $"{RandomPlaneNames[new Random()
+                .Next(0, RandomPlaneNames.Length - 1)]}-{new Random()
+                .Next(1, 200)}";
+        await _planeDbContext.Planes
+            .AddAsync(newPlane, cancellationToken);
         return newPlane.Id;
     }
 
@@ -196,8 +204,10 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         //Бизнес
         for (int i = 0; i < BusinessZonesInPlane; i++)
         {
-            var newZone = new Domain.Zone.Zone(_fixture.Create<Guid>(), planeId, "Бизнес");
-            await _zoneDbContext.Zones.AddAsync(newZone, cancellationToken);
+            var newZone = new Domain.Zone.Zone(_fixture
+                .Create<Guid>(), planeId, "Бизнес");
+            await _zoneDbContext.Zones
+                .AddAsync(newZone, cancellationToken);
             newZonesId.Item1 = newZone.Id;
         }
 
@@ -206,7 +216,8 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         for (int i = 0; i < EconomyZonesInPlane; i++)
         {
             var newZone = new Domain.Zone.Zone(_fixture.Create<Guid>(), planeId, $"Эконом №{i + 1}");
-            await _zoneDbContext.Zones.AddAsync(newZone, cancellationToken);
+            await _zoneDbContext.Zones
+                .AddAsync(newZone, cancellationToken);
             economyZoneIds.Add(newZone.Id);
         }
 
@@ -225,10 +236,13 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         //Бизнес
         for (int i = 0; i < EquipsInBusiness * BusinessZonesInPlane; i++)
         {
-            var newEquip = new Domain.Equip.Equip(_fixture.Create<string>(), idZones.Item1, EquipsSpaceInBusiness[i],
-                _fixture.Create<string>(), _fixture.Create<Type>(), _fixture.Create<DateTimeOffset>(),
+            var newEquip = new Domain.Equip.Equip(_fixture.Create<string>(), 
+                idZones.Item1, EquipsSpaceInBusiness[i],
+                _fixture.Create<string>(), _fixture.Create<Type>(), 
+                _fixture.Create<DateTimeOffset>(),
                 _fixture.Create<DateTimeOffset>(), (Status)new Random().Next(0, 5));
-            await _equipDbContext.Equips.AddAsync(newEquip, cancellationToken);
+            await _equipDbContext.Equips
+                .AddAsync(newEquip, cancellationToken);
             newEquips.Item1.Add(newEquip.Id);
         }
 
@@ -240,14 +254,16 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
             {
                 var newEquip = new Domain.Equip.Equip(_fixture.Create<string>(), idZones.Item2[i],
                     EquipsSpaceInEconomy[spaces],
-                    _fixture.Create<string>(), _fixture.Create<Type>(), _fixture.Create<DateTimeOffset>(),
-                    _fixture.Create<DateTimeOffset>(), (Status)new Random().Next(0, 5));
-                await _equipDbContext.Equips.AddAsync(newEquip, cancellationToken);
+                    _fixture.Create<string>(), _fixture.Create<Type>(), 
+                    _fixture.Create<DateTimeOffset>(),
+                    _fixture.Create<DateTimeOffset>(), 
+                    (Status)new Random().Next(0, 5));
+                await _equipDbContext.Equips
+                    .AddAsync(newEquip, cancellationToken);
                 newEquips.Item2.Add(newEquip.Id);
                 spaces++;
             }
         }
-
         return newEquips;
     }
 
@@ -264,10 +280,12 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
         var userTimeInfo = new List<(Guid, DateTimeOffset)>();
         foreach (var user in users)
         {
-            var dateStartCheck = new Random().Next(1, 10);
+            var dateStartCheck = new Random()
+                .Next(1, 10);
             var checker = new Checker(user, dateStart)
             {
-                DateTimeFinish = dateStart.AddMinutes(dateStartCheck)
+                DateTimeFinish = dateStart
+                    .AddMinutes(dateStartCheck)
             };
             businessZone.Checkers.Add(checker);
             userTimeInfo.Add(new ValueTuple<Guid, DateTimeOffset>(user, checker.DateTimeFinish.Value));
@@ -279,8 +297,10 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
                 await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == equip,
                     cancellationToken: cancellationToken);
             var randomUser = userTimeInfo[new Random().Next(0, userTimeInfo.Count - 1)];
-            var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0, 5), equipInfo.Space,
-                randomUser.Item2.AddMinutes(new Random().Next(1, 20)), randomUser.Item1);
+            var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0, 5), 
+                equipInfo.Space,
+                randomUser.Item2.AddMinutes(new Random().Next(1, 20)),
+                randomUser.Item1);
             equipsBusinessChecks.Add(equipCheck);
         }
 
@@ -317,11 +337,14 @@ public class FullReportGenerateCommandHandler : IRequestHandler<FullReportGenera
                 }
 
                 var equipInfo =
-                    await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == equips.Item2[z],
+                    await _equipDbContext.Equips
+                        .FirstOrDefaultAsync(e => e.Id == equips.Item2[z],
                         cancellationToken: cancellationToken);
                 var randomUser = userTimeInfoEconomy[new Random().Next(0, userTimeInfoEconomy.Count - 1)];
-                var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0, 5), equipInfo.Space,
-                    randomUser.Item2.AddMinutes(new Random().Next(1, 20)), randomUser.Item1);
+                var equipCheck = new EquipReport(equipInfo.Id, (Status)new Random().Next(0, 5),
+                    equipInfo.Space,
+                    randomUser.Item2.AddMinutes(new Random().Next(1, 20)),
+                    randomUser.Item1);
                 equipsEconomyChecks.Add(equipCheck);
                 countEquipInZone++;
                 zonesEquipsCreate++;

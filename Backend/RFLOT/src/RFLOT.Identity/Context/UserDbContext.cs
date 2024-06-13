@@ -19,7 +19,8 @@ public class UserDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.EnableSensitiveDataLogging();
-        if (!optionsBuilder.IsConfigured) throw new InvalidOperationException("Context was not configured");
+        if (!optionsBuilder.IsConfigured)
+            throw new InvalidOperationException("Context was not configured");
 
         base.OnConfiguring(optionsBuilder);
     }

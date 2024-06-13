@@ -17,7 +17,8 @@ public class EquipExitCheckCommandHandler : IRequestHandler<EquipExitCheckComman
 
     public async Task<EquipInfo?> Handle(EquipExitCheckCommand command, CancellationToken cancellationToken)
     {
-        var equip = await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == command.IdEquip,
+        var equip = await _equipDbContext.Equips
+            .FirstOrDefaultAsync(e => e.Id == command.IdEquip,
             cancellationToken: cancellationToken);
         if (equip is null)
         {

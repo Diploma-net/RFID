@@ -28,14 +28,16 @@ public class StartMonitoringCommandHandler : IRequestHandler<StartMonitoringComm
     public async Task<Dictionary<string, Status>> Handle(StartMonitoringCommand command,
         CancellationToken cancellationToken)
     {
-        var plane = await _planeDbContext.Planes.FirstOrDefaultAsync(p => p.Name == command.PlaneName,
+        var plane = await _planeDbContext.Planes
+            .FirstOrDefaultAsync(p => p.Name == command.PlaneName,
             cancellationToken: cancellationToken);
         if (plane is null)
         {
             throw new ApplicationException("Неверное имя самолёта");
         }
         var report =
-            await _reportDbContext.Reports.FirstOrDefaultAsync(r => r.StatusReport == true && r.IdPlane == plane.Id,
+            await _reportDbContext.Reports
+                .FirstOrDefaultAsync(r => r.StatusReport == true && r.IdPlane == plane.Id,
                 cancellationToken: cancellationToken);
         var result = new Dictionary<string, Status>();
         var zoneReports = report.ZoneReports;

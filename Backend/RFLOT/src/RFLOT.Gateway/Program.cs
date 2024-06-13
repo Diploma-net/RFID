@@ -29,8 +29,10 @@ builder.Services.AddHttpLogging(logging =>
 builder.Services.AddIdentity(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
+
 ConfigureLogging();
 builder.Host.UseSerilog();
+
 builder.Services.AddHealthChecks();
 builder.Services.AddSignalR();
 builder.Services.AddCors(options =>
@@ -38,9 +40,21 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: polity,
         policy =>
         {
-            policy.WithOrigins("https://10.147.17.151", "https://10.147.17.151:5031", "https://10.147.17.151:5032",
-                "http://10.147.17.251:5050");
+            policy
+                .WithOrigins("https://10.147.17.151", "https://10.147.17.151:5031", "https://10.147.17.151:5032",
+                    "http://10.147.17.251:5050")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
         });
+    options.AddPolicy("reactHub", builder =>
+    {
+        builder
+            .WithOrigins("https://10.147.17.151:5032/hub")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
 });
 
 builder.SetupSwagger();
@@ -64,13 +78,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseMetricServer();
+
 app.UseMiddleware<ResponseMetricMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseHealthChecks("/health");
+
 app.UseCors(x => x
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
+
 //Endpoints
 app.MapHub<MonitoringHub>("/hub");
 app.AddAuthEndpoints();
@@ -107,12 +124,18 @@ void ConfigureLogging()
 
 ElasticsearchSinkOptions ConfigureElasticSink(IConfigurationRoot configuration, string environment)
 {
-    return new ElasticsearchSinkOptions(new Uri(Environment.GetEnvironmentVariable("ELASTIC_ROUTE") ??
+    return new ElasticsearchSinkOptions(new Uri(Environment
+                                                    .GetEnvironmentVariable("ELASTIC_ROUTE") ??
                                                 configuration["ElasticConfiguration:Uri"]!))
     {
         AutoRegisterTemplate = true,
         IndexFormat =
-            $"route-{Assembly.GetExecutingAssembly().GetName().Name!.ToLower().Replace(".", "-")}-{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}",
+            $"route-{Assembly.GetExecutingAssembly()
+                .GetName().Name!
+                .ToLower()
+                .Replace(".", "-")}-{environment?
+                .ToLower()
+                .Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}",
         NumberOfReplicas = 1,
         NumberOfShards = 2
     };

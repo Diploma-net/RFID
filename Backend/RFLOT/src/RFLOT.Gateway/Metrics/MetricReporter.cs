@@ -5,7 +5,10 @@ namespace RFLOT.Gateway.Metrics;
 public class MetricReporter(ILogger<MetricReporter> logger)
 {
     private readonly ILogger<MetricReporter> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    private readonly Counter _requestCounter = Prometheus.Metrics.CreateCounter("total_requests", "The total number of requests serviced by this API.");
+
+    private readonly Counter _requestCounter =
+        Prometheus.Metrics.CreateCounter("total_requests", "The total number of requests serviced by this API.");
+
     private readonly Histogram _responseTimeHistogram = Prometheus.Metrics.CreateHistogram("request_duration_seconds",
         "The duration in seconds between the response to a request.", new HistogramConfiguration
         {

@@ -29,7 +29,8 @@ public class GetGlobalAnalyticQueryHandler : IRequestHandler<GetGlobalAnalyticQu
         var avarageTime = new List<TimeSpan>();
         foreach (var report in _reportDbContext.Reports)
         {
-            if (report.DateTimeFinish == null) continue;
+            if (report.DateTimeFinish == null)
+                continue;
             var time = report.DateTimeFinish.Value.DateTime - report.DateTimeStart.DateTime;
             avarageTime.Add(time);
         }
@@ -38,52 +39,69 @@ public class GetGlobalAnalyticQueryHandler : IRequestHandler<GetGlobalAnalyticQu
         {
             EquipAnalytic = new EquipAnalyticModel
             {
-                Count = await _equipDbContext.Equips.CountAsync(cancellationToken),
+                Count = await _equipDbContext.Equips
+                    .CountAsync(cancellationToken),
                 StatusAnalytic = new EquipStatusAnalyticModel
                 {
-                    Ok = await _equipDbContext.Equips.CountAsync(e => e.LastStatus == Status.Ok,
-                        cancellationToken: cancellationToken),
-                    DateMonth = await _equipDbContext.Equips.CountAsync(e => e.LastStatus == Status.DateMonth,
-                        cancellationToken: cancellationToken),
-                    DateFail = await _equipDbContext.Equips.CountAsync(e => e.LastStatus == Status.DateFail,
-                        cancellationToken: cancellationToken),
-                    NotFound = await _equipDbContext.Equips.CountAsync(e => e.LastStatus == Status.NotFound,
-                        cancellationToken: cancellationToken),
-                    Arсhive = await _equipDbContext.Equips.CountAsync(e => e.LastStatus == Status.Arсhive,
-                        cancellationToken: cancellationToken),
-                    None = await _equipDbContext.Equips.CountAsync(e => e.LastStatus == Status.None,
-                        cancellationToken: cancellationToken)
+                    Ok = await _equipDbContext.Equips
+                        .CountAsync(e => e.LastStatus == Status.Ok,
+                            cancellationToken: cancellationToken),
+                    DateMonth = await _equipDbContext.Equips
+                        .CountAsync(e => e.LastStatus == Status.DateMonth,
+                            cancellationToken: cancellationToken),
+                    DateFail = await _equipDbContext.Equips
+                        .CountAsync(e => e.LastStatus == Status.DateFail,
+                            cancellationToken: cancellationToken),
+                    NotFound = await _equipDbContext.Equips
+                        .CountAsync(e => e.LastStatus == Status.NotFound,
+                            cancellationToken: cancellationToken),
+                    Arсhive = await _equipDbContext.Equips
+                        .CountAsync(e => e.LastStatus == Status.Arсhive,
+                            cancellationToken: cancellationToken),
+                    None = await _equipDbContext.Equips
+                        .CountAsync(e => e.LastStatus == Status.None,
+                            cancellationToken: cancellationToken)
                 },
                 TypeAnalytic = new EquipTypeAnalyticModel
                 {
-                    FireExtinguisher = await _equipDbContext.Equips.CountAsync(e => e.Type == Type.FireExtinguisher,
-                        cancellationToken: cancellationToken),
-                    OxygenMask = await _equipDbContext.Equips.CountAsync(e => e.Type == Type.OxygenMask,
-                        cancellationToken: cancellationToken),
-                    InformationCard = await _equipDbContext.Equips.CountAsync(e => e.Type == Type.InformationCard,
-                        cancellationToken: cancellationToken)
+                    FireExtinguisher = await _equipDbContext.Equips
+                        .CountAsync(e => e.Type == Type.FireExtinguisher,
+                            cancellationToken: cancellationToken),
+                    OxygenMask = await _equipDbContext.Equips
+                        .CountAsync(e => e.Type == Type.OxygenMask,
+                            cancellationToken: cancellationToken),
+                    InformationCard = await _equipDbContext.Equips
+                        .CountAsync(e => e.Type == Type.InformationCard,
+                            cancellationToken: cancellationToken)
                 },
                 EquipTypeLost = new EquipTypeLostModel
                 {
-                    FireExtinguisherLost = await _equipDbContext.Equips.CountAsync(
+                    FireExtinguisherLost = await _equipDbContext.Equips
+                        .CountAsync(
                         e => e.LastStatus == Status.NotFound && e.Type == Type.FireExtinguisher,
                         cancellationToken: cancellationToken),
-                    InformationCardLost = await _equipDbContext.Equips.CountAsync(
+                    InformationCardLost = await _equipDbContext.Equips
+                        .CountAsync(
                         e => e.LastStatus == Status.NotFound && e.Type == Type.InformationCard,
                         cancellationToken: cancellationToken),
-                    OxygenMaskLost = await _equipDbContext.Equips.CountAsync(
+                    OxygenMaskLost = await _equipDbContext.Equips
+                        .CountAsync(
                         e => e.LastStatus == Status.NotFound && e.Type == Type.OxygenMask,
                         cancellationToken: cancellationToken)
                 }
             },
             PlaneAnalytic = new PlaneAnalyticModel
             {
-                Count = await _planeDbContext.Planes.CountAsync(cancellationToken)
+                Count = await _planeDbContext.Planes
+                    .CountAsync(cancellationToken)
             },
             ReportAnalytic = new ReportAnalyticModel
             {
-                Count = await _reportDbContext.Reports.CountAsync(cancellationToken),
-                AverageTimeReport = new TimeSpan(Convert.ToInt64(avarageTime.Average(timeSpan => timeSpan.Ticks)))
+                Count = await _reportDbContext.Reports
+                    .CountAsync(cancellationToken),
+                AverageTimeReport = new TimeSpan(Convert
+                    .ToInt64(avarageTime
+                    .Average(timeSpan => timeSpan.Ticks)))
             }
         };
         return result;

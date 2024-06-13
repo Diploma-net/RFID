@@ -20,23 +20,30 @@ public class GetReportsQueryHandler : IRequestHandler<GetReportsQuery, List<GetR
 
     public async Task<List<GetReports>> Handle(GetReportsQuery query, CancellationToken cancellationToken)
     {
-        var reports = _reportDbContext.Reports.Where(r => r.StatusReport == query.ReportResult);
+        var reports = _reportDbContext.Reports
+            .Where(r => r.StatusReport == query.ReportResult);
 
         if (!string.IsNullOrEmpty(query.PlaneName))
         {
-            var plane = await _planeDbContext.Planes.FirstOrDefaultAsync(p => p.Name == query.PlaneName, cancellationToken: cancellationToken) ??
-                        throw new ApplicationException("Самолёт с данным названием не найден.");
-            reports = reports.Where(r => r.IdPlane == plane.Id);
+            var plane = await _planeDbContext.Planes
+                            .FirstOrDefaultAsync(p => p.Name == query.PlaneName,
+                                cancellationToken: cancellationToken)
+                        ?? throw new ApplicationException("Самолёт с данным названием не найден.");
+            reports = reports
+                .Where(r => r.IdPlane == plane.Id);
         }
 
-        if (query.ReportType != null )
+        if (query.ReportType != null)
         {
-            reports = reports.Where(r => r.Type == query.ReportType);
+            reports = reports
+                .Where(r => r.Type == query.ReportType);
         }
 
         if (query.ReportDate != null)
         {
-            reports = reports.Where(r => new DateOnly(r.DateTimeStart.Year, r.DateTimeStart.Month, r.DateTimeStart.Day) == DateOnly.Parse(query.ReportDate));
+            reports = reports
+                .Where(r => new DateOnly(r.DateTimeStart.Year, r.DateTimeStart.Month, r.DateTimeStart.Day) ==
+                            DateOnly.Parse(query.ReportDate));
         }
 
         var result = new List<GetReports>();
@@ -48,7 +55,8 @@ public class GetReportsQueryHandler : IRequestHandler<GetReportsQuery, List<GetR
                 ReportType = report.Type,
                 DateTimeStart = report.DateTimeStart,
                 DateTimeFinish = report.DateTimeFinish,
-                NamePlane = _planeDbContext.Planes.FirstOrDefault(p => p.Id == report.IdPlane).Name
+                NamePlane = _planeDbContext.Planes
+                    .FirstOrDefault(p => p.Id == report.IdPlane).Name
             });
         }
 

@@ -15,7 +15,8 @@ public class StopAllReportJobHandler : IRequestHandler<StopAllReportsJob>
 
     public async Task Handle(StopAllReportsJob notification, CancellationToken cancellationToken)
     {
-        var reports = _context.Reports.Where(r => r.StatusReport == true && (DateTimeOffset.Now-r.DateTimeStart).Hours >= 1);
+        var reports = _context.Reports
+            .Where(r => r.StatusReport == true && (DateTimeOffset.Now-r.DateTimeStart).Hours >= 1);
         if (reports.Any())
         {
             foreach (var r in reports)

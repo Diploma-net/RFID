@@ -8,7 +8,5 @@ public class FullReportGenerateCommand : IRequest<List<Guid>>
     {
         CountGenerate = count;
     }
-
     public int CountGenerate { get; }
-
 }

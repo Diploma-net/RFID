@@ -15,6 +15,7 @@ public class ResponseMetricMiddleware(RequestDelegate request)
             await _request.Invoke(httpContext);
             return;
         }
+
         var sw = Stopwatch.StartNew();
 
         try

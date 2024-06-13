@@ -25,22 +25,28 @@ public class CheckEquipCommandHandler : IRequestHandler<CheckEquipCommand, Equip
     public async Task<EquipInfo> Handle(CheckEquipCommand command, CancellationToken cancellationToken)
     {
         var equip =
-            await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == command.IdEquip,
-                cancellationToken) ?? throw new ApplicationException("АСО не найдено");
+            await _equipDbContext.Equips
+                .FirstOrDefaultAsync(e => e.Id == command.IdEquip,
+                cancellationToken) 
+            ?? throw new ApplicationException("АСО не найдено");
         var equipLastStatus = equip.LastStatus;
         equip.CheckEquip(command.StatusEquip, command.IdReport, command.IdZone, command.IdUser);
         _equipDbContext.Update(equip);
         await _equipDbContext.SaveChangesAsync(cancellationToken);
-        var report = await _reportDbContext.Reports.FirstOrDefaultAsync(r => r.Id == command.IdReport,
+        var report = await _reportDbContext.Reports
+            .FirstOrDefaultAsync(r => r.Id == command.IdReport,
             cancellationToken: cancellationToken);
         var countEquip = 0;
-        var zones = _zoneDbContext.Zones.Where(z => z.IdPlane == report.IdPlane);
+        var zones = _zoneDbContext.Zones
+            .Where(z => z.IdPlane == report.IdPlane);
         foreach (var zone in zones)
         {
-            countEquip += _equipDbContext.Equips.Count(e => e.ZoneId == zone.Id);
+            countEquip += _equipDbContext.Equips
+                .Count(e => e.ZoneId == zone.Id);
         }
 
-        if (report.ZoneReports.Select(z => z.EquipReports.Count).Count() >= countEquip)
+        if (report.ZoneReports.Select(z => z.EquipReports.Count)
+                .Count() >= countEquip)
         {
             report.StatusReport = false;
         }

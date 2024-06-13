@@ -18,7 +18,8 @@ public class GetReportPlaneQueryHandler : IRequestHandler<GetReportPlaneQuery, R
     public async Task<ReportPlaneResult> Handle(GetReportPlaneQuery query, CancellationToken cancellationToken)
     {
         var report =
-            await _reportContext.Reports.FirstOrDefaultAsync(r => r.Id == query.IdReport,
+            await _reportContext.Reports
+                .FirstOrDefaultAsync(r => r.Id == query.IdReport,
                 cancellationToken);
         return new ReportPlaneResult();
     }

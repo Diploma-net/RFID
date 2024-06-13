@@ -14,10 +14,12 @@ public class MonitoringHub : Hub, INotificationHandler<NewEquipCheckedInReport>
 
     public async Task JoinInMonitoringZone(ZoneConnection connection)
     {
-        if (_zoneConnections.Any(z => z.Item1 == $"{connection.IdReport.ToString()}_{connection.IdZone.ToString()}"))
+        if (_zoneConnections.Any(z => 
+                z.Item1 == $"{connection.IdReport.ToString()}_{connection.IdZone.ToString()}"))
         {
             _zoneConnections
-                .First(z => z.Item1 == $"{connection.IdReport.ToString()}_{connection.IdZone.ToString()}")
+                .First(z => 
+                    z.Item1 == $"{connection.IdReport.ToString()}_{connection.IdZone.ToString()}")
                 .Item2.Add(connection);
         }
         else
@@ -26,16 +28,19 @@ public class MonitoringHub : Hub, INotificationHandler<NewEquipCheckedInReport>
                 new List<ZoneConnection> { connection }));
         }
 
-        await Groups.AddToGroupAsync(Context.ConnectionId,
+        await Groups
+            .AddToGroupAsync(Context.ConnectionId,
             $"{connection.IdReport.ToString()}_{connection.IdZone.ToString()}");
     }
 
     public async Task JoinInMonitoringPlane(PlaneConnection connection)
     {
-        if (_planeConnections.Any(z => z.Item1 == connection.IdReport.ToString()))
+        if (_planeConnections.Any(z => 
+                z.Item1 == connection.IdReport.ToString()))
         {
             _planeConnections
-                .First(z => z.Item1 == connection.IdReport.ToString())
+                .First(z => 
+                    z.Item1 == connection.IdReport.ToString())
                 .Item2.Add(connection);
         }
         else
@@ -43,7 +48,8 @@ public class MonitoringHub : Hub, INotificationHandler<NewEquipCheckedInReport>
             _planeConnections.Add((connection.IdReport.ToString(), new List<PlaneConnection> { connection }));
         }
 
-        await Groups.AddToGroupAsync(Context.ConnectionId, connection.IdReport.ToString());
+        await Groups
+            .AddToGroupAsync(Context.ConnectionId, connection.IdReport.ToString());
     }
 
     public async Task Handle(NewEquipCheckedInReport notification, CancellationToken cancellationToken)
@@ -54,7 +60,9 @@ public class MonitoringHub : Hub, INotificationHandler<NewEquipCheckedInReport>
             {
                 notification.IdReport.ToString(),
                 $"{notification.IdReport.ToString()}/{notification.IdZone.ToString()}"
-            }).SendCoreAsync("NewEquipCheck", new object[] { new Message(notification.Space, notification.Status) },
+            })
+                .SendCoreAsync("NewEquipCheck", 
+                    new object[] { new Message(notification.Space, notification.Status) },
                 cancellationToken);
         }
     }

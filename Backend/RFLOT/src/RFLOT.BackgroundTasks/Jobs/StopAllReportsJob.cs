@@ -4,5 +4,4 @@ namespace RFLOT.BackgroundTasks.Jobs;
 
 public class StopAllReportsJob : IRequest
 {
-  
 }

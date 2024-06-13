@@ -5,5 +5,4 @@ namespace RFLOT.Application.Analytic.Query;
 
 public class GetGlobalAnalyticQuery : IRequest<GlobalAnalyticModel>
 {
-    
 }

@@ -7,5 +7,4 @@ public class OneZoneInfo
     public List<string> Spaces { get; set; }
     public string Name { get; set; }
     public List<ReportEquipResult> EquipResults { get; set; }
-    // подключение
 }

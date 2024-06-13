@@ -24,14 +24,21 @@ public static class EquipEndpoints
             {
                 var result = await mediator.Send(new CheckEquipCommand(checkEquipDto.IdEquip, checkEquipDto.StatusEquip,
                     checkEquipDto.IdZone, checkEquipDto.IdReport, checkEquipDto.IdUser));
-                return Results.Ok(new {EquipInfo = result});
+                return Results.Ok(
+                    new
+                    {
+                        EquipInfo = result
+                    }
+                );
             });
-        
+
         endpoints.MapPost("/exit-check",
             async (IMediator mediator, EquipExitCheckDto equipExitCheckDto) =>
             {
                 var result = await mediator.Send(new EquipExitCheckCommand(equipExitCheckDto.IdEquip));
-                return result != null ? Results.Ok(new {EquipInfo = result}) : Results.NotFound();
+                return result != null
+                    ? Results.Ok(new { EquipInfo = result })
+                    : Results.NotFound();
             });
 
         return app;

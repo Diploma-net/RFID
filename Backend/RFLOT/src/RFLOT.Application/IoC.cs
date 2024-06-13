@@ -16,10 +16,12 @@ public static class IoC
         services.AddDatabase(configuration);
         services.AddBackgroundTasks(configuration, assembly);
         services.AddSignalRCore();
-        services.AddMediatR(x => x.RegisterServicesFromAssembly(assembly));
+        services.AddMediatR(x => 
+            x.RegisterServicesFromAssembly(assembly));
         services.AddAutoMapper(assembly);
         services.AddValidatorsFromAssembly(assembly);
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>),
+            typeof(ValidationBehavior<,>));
         return services;
     }
 }

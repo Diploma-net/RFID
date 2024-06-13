@@ -10,15 +10,22 @@ public static class AuthEndpoints
     {
         var endpoints = app.MapGroup("/auth");
 
-        endpoints.MapPost("/login-and-password", async (IAuthorization authorization, WithLoginAndPassDto withLoginAndPassDto) =>
-        {
-            var idUser = await authorization.Authorization(withLoginAndPassDto.Login, withLoginAndPassDto.Password);
-            return idUser != null ? Results.Ok(new { UserId = idUser.Value.Item1, UserName = idUser.Value.Item2 }) : Results.NotFound();
-        });
+        endpoints.MapPost("/login-and-password",
+            async (IAuthorization authorization, WithLoginAndPassDto withLoginAndPassDto) =>
+            {
+                var idUser = await authorization
+                    .Authorization(withLoginAndPassDto.Login, withLoginAndPassDto.Password);
+                return idUser != null
+                    ? Results.Ok(new { UserId = idUser.Value.Item1, UserName = idUser.Value.Item2 })
+                    : Results.NotFound();
+            });
         endpoints.MapPost("/rfid", async (IAuthorization authorization, WithRfidDto rfid) =>
         {
-            var idUser = await authorization.Authorization(rfid.Rfid);
-            return idUser != null ? Results.Ok(new { UserId = idUser.Value.Item1, UserName = idUser.Value.Item2 }) : Results.NotFound();
+            var idUser = await authorization
+                .Authorization(rfid.Rfid);
+            return idUser != null
+                ? Results.Ok(new { UserId = idUser.Value.Item1, UserName = idUser.Value.Item2 })
+                : Results.NotFound();
         });
         return app;
     }

@@ -19,11 +19,14 @@ public class CheckedEquipNotificationHandler : INotificationHandler<EquipChecked
 
     public async Task Handle(EquipChecked notification, CancellationToken cancellationToken)
     {
-        var report = await _reportDbContext.Reports.FirstOrDefaultAsync(r => r.Id == notification.IdReport,
+        var report = await _reportDbContext.Reports
+            .FirstOrDefaultAsync(r => r.Id == notification.IdReport,
             cancellationToken: cancellationToken);
-        var equip = await _equipDbContext.Equips.FirstOrDefaultAsync(e => e.Id == notification.IdEquip,
+        var equip = await _equipDbContext.Equips
+            .FirstOrDefaultAsync(e => e.Id == notification.IdEquip,
             cancellationToken: cancellationToken);
-        report.AddCheckedEquip(notification.IdZone, notification.IdEquip, notification.Status, equip.Space,
+        report.AddCheckedEquip(notification.IdZone, notification.IdEquip, 
+            notification.Status, equip.Space,
             notification.IdUser);
         _reportDbContext.Update(report);
         await _reportDbContext.SaveChangesAsync(cancellationToken);

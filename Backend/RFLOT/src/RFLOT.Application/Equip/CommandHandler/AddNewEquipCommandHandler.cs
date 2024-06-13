@@ -15,8 +15,9 @@ public class AddNewEquipCommandHandler : IRequestHandler<AddNewEquipCommand>
 
     public async Task Handle(AddNewEquipCommand command, CancellationToken cancellationToken)
     {
-        /*var newEquip = new Equip(command.Id, command.)
-       await _dbContext.Equips.AddAsync(newEquip, cancellationToken);
-       await _dbContext.SaveChangesAsync(cancellationToken);*/
+        var newEquip = new Equip(command.Id);
+       await _dbContext.Equips
+           .AddAsync(newEquip, cancellationToken);
+       await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

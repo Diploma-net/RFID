@@ -1,7 +1,24 @@
+version: '3.3'
+
+networks:
+  network-app:
+    driver: bridge
+
 services:
+  web_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    restart: always
+    ports:
+     - '5000-5001:5000-5001'
+    networks:
+      - network-app
+
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:14.1-alpine
     environment:
       POSTGRES_DB: "rfid"
       POSTGRES_USER: "rfid"
@@ -10,18 +27,81 @@ services:
       - ./db-data:/var/lib/postgresql/data
       - ./init-data:/docker-entrypoint-initdb.d/
     ports:
-      - "5432:5432"
+      - '5432:5432'
+    networks:
+      - network-app
+
   pgadmin:
     container_name: pgadmin_container
-    image: dpage/pgadmin4:latest
+    image: dpage/pgadmin4:7.2
     environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
-      PGADMIN_DEFAULT_PASSWORD: "postgres"
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.ru"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
     volumes:
-      - ./pgadmin:/var/lib/pgadmin
+      - pgadmin-data:/var/lib/pgadmin
+    restart: always
     ports:
-      - "5050:80"
+      - '5050:80'
+    networks:
+      - network-app
+
+  prometheus:
+    container_name: prometheus_container
+    image: prom/prometheus:v2.52.0
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - '9090:9090'
+    restart: unless-stopped
+    networks:
+      - network-app
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=your_password
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana:/var/lib/grafana
+    networks:
+      - network-app
+
+  elasticsearch:
+    container_name: elasticsearch
+    restart: always
+    image: elasticsearch:8.13.4
+    ports:
+      - 9200:9200
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    networks:
+      - network-app
+
+  kibana:
+    container_name: kibana
+    restart: always
+    image: kibana:8.13.4
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    networks:
+      - network-app
+
 volumes:
-  postgres:
-  pgadmin:
+  db-data:
+  pgadmin-data:
+  elasticsearch-data:
+  grafana:
+  prometheus-data:

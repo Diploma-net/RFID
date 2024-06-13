@@ -10,7 +10,8 @@ public static class IoC
 {
     public static IServiceCollection AddBackgroundTasks(this IServiceCollection services, IConfiguration configuration, Assembly assembly)
     {
-        services.AddMediatR(x => x.RegisterServicesFromAssembly(assembly));
+        services.AddMediatR(x => 
+            x.RegisterServicesFromAssembly(assembly));
         return services;
     }
 }

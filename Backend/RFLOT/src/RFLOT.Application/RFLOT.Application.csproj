@@ -32,7 +32,6 @@
         <Folder Include="Plane\NotificationHandler\"/>
         <Folder Include="Plane\QueryHandler\"/>
         <Folder Include="Plane\Query\"/>
-        <Folder Include="Zone\NotificationHandler\" />
     </ItemGroup>
 
 </Project>

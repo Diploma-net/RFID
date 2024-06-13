@@ -16,7 +16,8 @@ public class StopReportJobHandler : INotificationHandler<NewReport>
     public async Task Handle(NewReport job, CancellationToken cancellationToken)
     {
         await Task.Delay(TimeSpan.FromHours(1), cancellationToken);
-        var report = _context.Reports.FirstOrDefault(r => r.Id == job.IdReport);
+        var report = _context.Reports
+            .FirstOrDefault(r => r.Id == job.IdReport);
         report.StatusReport = false;
         report.DateTimeFinish = DateTimeOffset.Now;
         await _context.SaveChangesAsync(cancellationToken);

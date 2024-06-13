@@ -12,7 +12,6 @@ public class Message<T>
 
     public string Id { get; private set; }
     public T Data { get; private set; }
-    public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 
     public override string ToString()
     {

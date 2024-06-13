@@ -16,7 +16,8 @@ public class StartCheckPlaneCommandHandler : IRequestHandler<StartCheckPlaneComm
 
     public async Task<Guid> Handle(StartCheckPlaneCommand command, CancellationToken cancellationToken)
     {
-        var report = await _reportDbContext.Reports.FirstOrDefaultAsync(r =>
+        var report = await _reportDbContext.Reports
+            .FirstOrDefaultAsync(r =>
             r.StatusReport == true && r.Type == command.TypeCheck, cancellationToken);
         if (report != null)
         {
