@@ -63,7 +63,7 @@ export default function AppHeader() {
                 <NavLink to="/">Главная</NavLink>
                 <NavLink to="/monitor">Мониторинг</NavLink>
                 <NavLink to="/report">Отчеты о проверках</NavLink>
-                <NavLink to="/dashborad">Дашборды</NavLink>
+                <NavLink to="/dashborad">Аналитика</NavLink>
               </Nav>
               <div
                 style={{

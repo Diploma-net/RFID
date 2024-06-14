@@ -46,14 +46,14 @@ export default function Homepage() {
             проверках.
             <br />
             <br /> Также сервис предоставляет удобный инструмент для агрегации
-            данных при помощи дашбордов.
+            данных при помощи дашборда.
           </p>
         </div>
         <div className="infoCreators" style={infoCreators}>
           <Container>
             <div className="infoCreators-row1" style={infoCreatorsRow1}>
               <h2 style={{ marginBottom: "20px", fontWeight: "bold" }}>
-                Команда разработчик
+                Команда разработчиков
               </h2>
               <Row>
                 <Col xs={6} md={4}>

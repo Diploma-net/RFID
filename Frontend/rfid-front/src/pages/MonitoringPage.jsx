@@ -1,10 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./rfid-logo.svg";
 import { Link } from "react-router-dom";
+import { getMonitoringAllPlane } from "../api/apiClient";
+import TableForMonitorinPage from "../components/TableForMonitorinPage";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Monitoringpage() {
   const [idSearch, setIdSearch] = useState("");
-  
+  const [allPlaneMonitoring, setAllPlaneMonitoring] = useState(new Map());
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const allMonitoringPlane = async () => {
+      try {
+        const response = await getMonitoringAllPlane();
+        for (const [key, value] of Object.entries(response)) {
+          allPlaneMonitoring.set(key, value);
+        }
+        setAllPlaneMonitoring(new Map(allPlaneMonitoring));
+        setIsLoading(false);
+      } catch (error) {
+        console.error(
+          "Какая-то проблема с выводом всех самолетов мониторинга: ",
+          error
+        );
+      }
+    };
+    allMonitoringPlane();
+  }, []);
+
   return (
     <>
       <img src={Logo} style={{ width: "25%", alignSelf: "center" }} />
@@ -16,7 +40,9 @@ export default function Monitoringpage() {
           autoComplete="off"
           className="input-search"
           style={{ border: "none" }}
-          onChange={(e) => setIdSearch(e.target.value)}
+          onChange={(e) => {
+            setIdSearch(e.target.value);
+          }}
         />
         <Link style={{ border: "none", background: "none" }} to={`${idSearch}`}>
           <svg
@@ -44,6 +70,27 @@ export default function Monitoringpage() {
           </svg>
         </Link>
       </div>
+      {isLoading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "auto",
+          }}
+        >
+          <Spinner
+            animation="border"
+            variant="primary"
+            style={{ marginRight: "20px" }}
+          />
+        </div>
+      ) : (
+        <TableForMonitorinPage
+          data={allPlaneMonitoring}
+          textForButton={"Перейти к мониторингу"}
+        />
+      )}
     </>
   );
 }
